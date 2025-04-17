@@ -173,6 +173,28 @@ window.onload = function() {
 
     // Initialize the search engine
     regionDropdown();
+
+
+
+
+    // Part 4: Forecast
+    getWeather('forecast').then(data => {
+        let report = data.generalSituation;
+        document.getElementById('forecast_report').innerText = report;
+
+        console.log(data);
+
+        let forecasts = data.weatherForecast;
+        console.log(forecasts);
+
+
+
+
+    }).catch(error => {
+        console.error("Error fetching forecast data:", error);
+    });
+
+
 };
 
 
@@ -228,8 +250,9 @@ function determineWeather(forecast){
 // Get regional weather condition
 async function getRegionalWeather(placeName = "Hong Kong Observatory", district = "Yau Tsim Mong") {
     return getWeather('current').then(data => {
-        let humidity = data.humidity.data[0].value || 0;
-         let uvIndex = data.uvindex.data[0].value || data.uvindex || "-";
+        let humidity = data.humidity?.data?.[0]?.value ?? "-";
+        let uvIndex = data.uvindex?.data?.[0]?.value ?? data.uvindex ?? "-";        
+        uvIndex = uvIndex === "" ? "-" : uvIndex;
         let temperature = data.temperature.data.find(item => item.place === placeName) || "-";
         let rainfall = data.rainfall.data.find(item => item.place === district) || "-";
 
@@ -250,7 +273,7 @@ async function getRegionalWeather(placeName = "Hong Kong Observatory", district 
 async function getWeatherWarning() {
     return getWeather('warningSummary').then(data => {
 
-        // Sample data for testing
+        // // Sample data for testing
         data = {
             "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
             "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
@@ -269,8 +292,6 @@ async function getWeatherWarning() {
             return null;
         }
 
-
-        // const filteredWarnings = Object.values(data).map(({ name, code, issueTime }) => ({ name, code, issueTime }));
         const filteredWarnings = Object.values(data).map(({ name, code }) => ({ name, code }));
 
         return filteredWarnings;
@@ -514,10 +535,6 @@ function searchRegion(){
 
     }
 }
-
-
-
-
 
 // Fetch data from HK Observatory API
 async function getWeather(type) {
