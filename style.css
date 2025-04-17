@@ -319,11 +319,15 @@ p{
 }
 
 #forecast_list li{
-    align-items: center;
-    justify-content: space-evenly; /* Distributes space evenly between items */
+    align-items: right;
+    justify-content: space-between; /* Distributes space evenly between items */
     display: flex;
     border-bottom: 1px solid #dadada; /* Adds a light gray underline */
-    padding: 5px 0; /* Adds spacing above and below the text */
+    padding: 5px 20px; /* Adds spacing above and below the text */
+}
+
+.f_day{
+    width: 100px;
 }
 
 #forecast_list span{
@@ -337,5 +341,6 @@ p{
 
 #expand_button{
     width: 10px;
-    height: 8px;
+    height: 6px;
+    padding-top: 5px;
 }

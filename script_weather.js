@@ -186,9 +186,8 @@ window.onload = function() {
 
         let forecasts = data.weatherForecast;
         console.log(forecasts);
-
-
-
+        // Generate the forecast list
+        generateForecastList(forecasts);
 
     }).catch(error => {
         console.error("Error fetching forecast data:", error);
@@ -197,14 +196,40 @@ window.onload = function() {
 
 };
 
+function generateForecastList(weatherForecast) {
+    const forecastList = document.getElementById("forecast_list");
+    forecastList.innerHTML = "";
 
+    weatherForecast.forEach((day, index) => {
 
+        const listItem = document.createElement("li");
+        listItem.id = `day${index + 1}`;
 
+        date = day.forecastDate;
 
+        console.log(day.forecastWeather);
+        console.log(determineWeather(day.forecastWeather));
+        
 
+        const forecast_day = date.substring(6);
+        const dateObj = new Date(`${date.slice(0, 4)}-${date.slice(4, 6)}-${forecast_day}`);
+        const monthAbbreviation = dateObj.toLocaleString('en-US', { month: 'short' });  
 
+        listItem.innerHTML = `
+        <span class = "f_day">${day.week.slice(0,3)}, ${forecast_day} ${monthAbbreviation}</span>
+        <span class="f_temp_range">
+        
+            <img src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
 
-// Determine the weather based on the forecast description
+            <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
+            <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
+        </span>
+        <img id="expand_button" src="image/open.png" alt="Click me to expand">
+    `;
+        forecastList.appendChild(listItem);
+    });
+}
+
 function determineWeather(forecast){
 
     const forecastArray = forecast.toLowerCase().split(/\s+/); 
