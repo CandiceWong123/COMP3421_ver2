@@ -196,39 +196,94 @@ window.onload = function() {
 
 };
 
+// function generateForecastList(weatherForecast) {
+//     const forecastList = document.getElementById("forecast_list");
+//     forecastList.innerHTML = "";
+
+//     weatherForecast.forEach((day, index) => {
+
+//         const listItem = document.createElement("li");
+//         listItem.id = `day${index + 1}`;
+
+//         date = day.forecastDate;
+
+//         console.log(day.forecastWeather);
+//         console.log(determineWeather(day.forecastWeather));
+        
+
+//         const forecast_day = date.substring(6);
+//         const dateObj = new Date(`${date.slice(0, 4)}-${date.slice(4, 6)}-${forecast_day}`);
+//         const monthAbbreviation = dateObj.toLocaleString('en-US', { month: 'short' });  
+
+//         listItem.innerHTML = `
+//         <span class = "f_day">${day.week.slice(0,3)}, ${forecast_day} ${monthAbbreviation}</span>
+//         <span class="f_temp_range">
+        
+//             <img src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
+
+//             <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
+//             <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
+//         </span>
+//         <img id="expand_button" src="image/open.png" alt="Click me to expand">
+//     `;
+//         forecastList.appendChild(listItem);
+//     });
+// }
+
 function generateForecastList(weatherForecast) {
     const forecastList = document.getElementById("forecast_list");
-    forecastList.innerHTML = "";
+    forecastList.innerHTML = ""; // Clear existing content
 
     weatherForecast.forEach((day, index) => {
-
         const listItem = document.createElement("li");
         listItem.id = `day${index + 1}`;
+        listItem.classList.add("forecast-item"); // Add a class for styling
 
-        date = day.forecastDate;
+        const forecastDay = day.forecastDate.substring(6);
+        const dateObj = new Date(`${day.forecastDate.slice(0, 4)}-${day.forecastDate.slice(4, 6)}-${forecastDay}`);
+        const monthAbbreviation = dateObj.toLocaleString('en-US', { month: 'short' });
 
-        console.log(day.forecastWeather);
-        console.log(determineWeather(day.forecastWeather));
-        
-
-        const forecast_day = date.substring(6);
-        const dateObj = new Date(`${date.slice(0, 4)}-${date.slice(4, 6)}-${forecast_day}`);
-        const monthAbbreviation = dateObj.toLocaleString('en-US', { month: 'short' });  
-
+        // Main content of the list item
         listItem.innerHTML = `
-        <span class = "f_day">${day.week.slice(0,3)}, ${forecast_day} ${monthAbbreviation}</span>
-        <span class="f_temp_range">
-        
-            <img src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
+            <div class="forecast-summary">
+                <span class="f_day">${day.week.slice(0, 3)}, ${forecastDay} ${monthAbbreviation}</span>
+                <span class="f_temp_range">
+                    <img src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
+                    <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
+                    <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
+                </span>
+                <img id="expand_button" src="image/open.png" alt="Click me to expand">
+            </div>
+            <div class="forecast-details" style="display: none;">
+                <p><strong>Wind:</strong> ${day.forecastWind}</p>
+                <p><strong>Weather:</strong> ${day.forecastWeather}</p>
+                <p><strong>Max Humidity:</strong> ${day.forecastMaxrh.value}%</p>
+                <p><strong>Min Humidity:</strong> ${day.forecastMinrh.value}%</p>
+                <p><strong>PSR:</strong> ${day.PSR}</p>
+            </div>
+        `;
 
-            <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
-            <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
-        </span>
-        <img id="expand_button" src="image/open.png" alt="Click me to expand">
-    `;
+        // Add click event to the expand button
+        const expandButton = listItem.querySelector("#expand_button");
+        expandButton.addEventListener("click", () => {
+            const details = listItem.querySelector(".forecast-details");
+
+            // Toggle the visibility of the details
+            if (details.style.display === "none") {
+                // Collapse all other details
+                document.querySelectorAll(".forecast-details").forEach(detail => {
+                    detail.style.display = "none";
+                });
+                details.style.display = "block"; // Expand the clicked item
+            } else {
+                details.style.display = "none"; // Collapse the clicked item
+            }
+        });
+
         forecastList.appendChild(listItem);
     });
 }
+
 
 function determineWeather(forecast){
 
