@@ -1,38 +1,43 @@
-// Provided JSON data
-const data = {
-    fields: ["YYYY-MM-DD", "RISE", "TRAN.", "SET"],
-    data: [
-        ["2025-04-16", "06:03", "12:23", "18:44"],
-        ["2025-04-17", "06:02", "12:23", "18:44"],
-        ["2025-04-18", "06:01", "12:23", "18:45"]
+// Sample JSON data
+const warnData = {
+    details: [
+        {
+            warningStatementCode: "WTS",
+            contents: [
+                "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
+                "Thunderstorms are expected to occur over Hong Kong."
+            ],
+            updateTime: "2020-09-24T05:00:00+08:00"
+        },
+        {
+            warningStatementCode: "WHOT",
+            contents: [
+                "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
+                "The risk of heatstroke is high."
+            ],
+            updateTime: "2020-09-24T07:00:00+08:00"
+        }
     ]
 };
 
-// Function to get sunrise and sunset time for today
-function getSunTimes(jsonData) {
+// Function to get warning details
+function getWarningDetail(warncode, warnName) {
+    // const name = document.getElementById('warn_name');
+    // const statement = document.getElementById('warn_statement');
 
-    
-    // const today = new Date().toISOString().slice(0, 10); // Get system date in 'YYYY-MM-DD' format
-    let today = new Date();
-    today = new Date().toISOString().slice(0, 8) + today.getDate(); // Get system date in 'YYYY-MM-DD' format
-    // console.log(today);
+    // name.style.display = "block";
+    // statement.style.display = "block";
 
+    // name.innerText = warnName;
 
-    const todayData = jsonData.data.find(entry => entry[0] === today);
+    // Find matching warning details
+    const warning = warnData.details.find(item => item.warningStatementCode === warncode);
 
-    
-    if (todayData) {
-        return {
-            sunrise: todayData[1],
-            transit: todayData[2],
-            sunset: todayData[3]
-        };
-    } else {
-        return "Data not available for today.";
-    }
+    console.log(warning.contents.join("\n"));
+
+    // // Display contents if found, else show a default message
+    // statement.innerText = warning ? warning.contents.join("\n") : "No details available for this warning.";
 }
 
-// Get sunrise and sunset times for today
-const sunTimes = getSunTimes(data);
-
-console.log(sunTimes);
+// Example usage
+getWarningDetail("WTS", "Thunderstorm Warning");

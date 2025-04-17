@@ -51,20 +51,22 @@
             </div>
             <div class="c_values">
                 <ul>
-                    <li>Min temp: <span id="c_min_temp"></span></li>
-                    <li>Max temp: <span id="c_max_temp"></span></li>
-                    <li>Sunrise: <span id="c_sunrise"></span></li>
-                    <li>Sunset: <span id="c_sunset"></span></li>
-                    <li>Moonrise: <span id="c_moonrise"></span></li>
-                    <li>Moonset: <span id="c_moonset"></span></li>
+                    <!-- <li>Min temp: <span id="c_min_temp"></span></li>
+                    <li>Max temp: <span id="c_max_temp"></span></li> -->
+                    <li>Humidity: <span id="c_humidity"></span></li>
+                    <li>UV: <span id="c_uv"></li>            
+                    <li>Visibility: <span id="c_visibility"></li>
+                    <li>Rainfall: <span id="c_rainfall"></li>  
+
+
 
                 </ul>
                 <ul>
-                    <li>Rainfall: <span id="c_rainfall"></li>  
-                    <li>Humidity: <span id="c_humidity"></span></li>
-          
-                    <li>UV: <span id="c_uv"></li>            
-                    <li>Visibility: <span id="c_visibility"></li>            
+                    <!-- <li>Rainfall: <span id="c_rainfall"></li>   -->
+                    <li>Sunrise: <span id="c_sunrise"></span></li>
+                    <li>Sunset: <span id="c_sunset"></span></li>
+                    <li>Moonrise: <span id="c_moonrise"></span></li>
+                    <li>Moonset: <span id="c_moonset"></span></li>            
                 </ul>
             </div>
         </div>
@@ -74,13 +76,12 @@
     <div id="warnings">
         <h2>WEATHER WARNINGS</h2>
         <ul id="warning_list">
-            <li ><img id="warn_icon" src = "image/warning/very_hot.png" alt = "Very Hot warning icon"></li>
-            <li ><img id="warn_icon" src = "image/warning/red_fire.png" alt = "Red Fire warning icon"></li>
-
         </ul>
         <div >
-            <span id="warn_name">Fire Danger Warning:</span>
-            <p id="warn_statement">The fire danger warning is Red and the fire risk is Extreme.</p>
+            <span id="warn_name"></span>
+            <!-- <span id="warn_name">Fire Danger Warning:</span> -->
+            <p id="warn_statement"></p>
+            <!-- <p id="warn_statement">The fire danger warning is Red and the fire risk is Extreme.</p> -->
         </div>
 
     </div>
@@ -93,18 +94,24 @@
                 <span id="r_temp">28.2°C</span>
                 <div class="r_values">
                     <ul>
-                        <li id="r_min_temp">Min temp: </li>
-                        <li id="r_humidity">Humidity: </li>
-                        <li id="r_testing">testing1: </li>            
+                        <!-- <li>Min temp: <span id="r_min_temp"></span></li>
+                        <li>Max temp: <span id="r_max_temp"></span></li> -->
+                        <li>Humidity: <span id="r_humidity"></span></li>
+                        <li>UV: <span id="r_uv"></span></li>
                     </ul>
                     <ul>
-                        <li id="r_max_temp">Max temp: </li>
-                        <li id="r_uv">UV: </li>
-                        <li id="r_testing">testing2: </li>            
+                        <!-- <li>UV: <span id="r_uv"></span></li> -->
+                        <li>Visibility: <span id="r_visibility"></span></li>
+                        <li>Rainfall: <span id="r_rainfall"></span></li>
                     </ul>
                 </div>
                 <div class = "search_engine">
-                    Search engine area
+                    <input type="text" class="search_input" placeholder="Search region">
+                    <button class="search_button" onclick="searchRegion()">Search</button>         
+                    <ul class="dropdown_list"></ul>
+
+
+
                 </div>
             </div>
             <img id="region_image" src = "image/region/shatin.jpg" alt = "shatin">

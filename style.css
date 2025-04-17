@@ -50,6 +50,11 @@
     text-decoration: none;
     color: rgb(0, 0, 0);
 }
+
+.navbar ul a:hover {
+    color: #256fa1;
+}
+
 .nav_links {
     display: flex;
     width: 50%;
@@ -62,6 +67,7 @@
 #fetch_date {
     margin-right: 10px;
     font-weight: 300;
+    font-size: 14px;
 }
 
 /* Style for body */
@@ -146,7 +152,8 @@ p{
 
 /* Style for division 2 - Warning weather */
 #warning_list {
-    display: flex; /* Enables Flexbox layout */
+    display: flex; 
+    flex-wrap: wrap; /* Allow items to wrap to the next line */
     justify-content: center; /* Centers the list horizontally */
     align-items: center; /* Centers the list vertically */
     list-style: none; /* Removes default bullet points */
@@ -154,6 +161,7 @@ p{
     padding: 0; /* Ensures no extra padding affects alignment */
     width: 100%; /* Optional: Ensures it spans the full width of the parent */
     height: 100%; /* Optional: Ensures it spans the full height of the parent */
+    gap: 10px; /* Adds space between items */
 }
 
 #warnings div{
@@ -194,28 +202,28 @@ p{
 }
 
 
-
-
 .r_preview{
-    margin-right: 80px;
+    width: 50%;
+    margin-right: 20px;
     align-items: center;
+    padding-left: 40px;
 }
 
 #r_region{
-    font-size: 49px;
+    font-size: 32px;
     font-weight: 480;
-    margin-right: 20px;
+    margin-right: 10px;
     margin-bottom: 30px;
 }
 
 #r_temp{
-    font-size: 30px;
+    font-size: 32px;
     font-weight: 420;
 }
 
 .r_values{
     color: #274C77;
-    width: 280px;
+    width: 300px;
     margin: 10px 0;
     font-weight: 380;
     display: flex;
@@ -228,7 +236,7 @@ p{
 }
 
 #region_image{
-    width: 42%;
+    width: 40%;
     height: 230px;
 
     /* height: auto;
@@ -240,7 +248,57 @@ p{
     border-radius: 20px; /* Adds rounded corners with a radius of 30px */
 }
 
+.search_engine {
+    display: flex;
+    align-items: center;
+    position: relative;
+}
 
+.search_input {
+    width: 170px;
+    padding: 10px 20px;
+    border: 1px solid #6096BA;
+    border-radius: 30px 0 0 30px;
+    outline: none;
+    font-size: 16px;
+}
+
+.search_button {
+    padding: 11px 20px;
+    border: none;
+    background-color: #6096BA;
+    color: white;
+    border-radius: 0 30px 30px 0;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.search_button:hover {
+    background-color: #3e6e8f;
+}
+.dropdown_list {
+    position: absolute;
+    top: 100%;
+    width: 200px;
+    background: white;
+    border: 1px solid #ddd; /* Light gray border */
+    border-radius: 0 0 8px 8px; /* Rounded bottom only */
+    max-height: 200px;
+    overflow-y: auto; /* Auto-scroll if needed */
+    padding: 0;
+    margin-left: 20px;
+    list-style: none;
+}
+
+.dropdown_item {
+    padding: 8px 30px;
+    cursor: pointer;
+    font-size: 15px;
+}
+
+.dropdown_item:hover {
+    background: #dbe9f9; /* Light gray hover */
+}
 
 
 /* Style for division 4 - 9-days forecast */
