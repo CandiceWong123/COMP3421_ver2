@@ -196,40 +196,6 @@ window.onload = function() {
 
 };
 
-// function generateForecastList(weatherForecast) {
-//     const forecastList = document.getElementById("forecast_list");
-//     forecastList.innerHTML = "";
-
-//     weatherForecast.forEach((day, index) => {
-
-//         const listItem = document.createElement("li");
-//         listItem.id = `day${index + 1}`;
-
-//         date = day.forecastDate;
-
-//         console.log(day.forecastWeather);
-//         console.log(determineWeather(day.forecastWeather));
-        
-
-//         const forecast_day = date.substring(6);
-//         const dateObj = new Date(`${date.slice(0, 4)}-${date.slice(4, 6)}-${forecast_day}`);
-//         const monthAbbreviation = dateObj.toLocaleString('en-US', { month: 'short' });  
-
-//         listItem.innerHTML = `
-//         <span class = "f_day">${day.week.slice(0,3)}, ${forecast_day} ${monthAbbreviation}</span>
-//         <span class="f_temp_range">
-        
-//             <img src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
-
-//             <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
-//             <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
-//         </span>
-//         <img id="expand_button" src="image/open.png" alt="Click me to expand">
-//     `;
-//         forecastList.appendChild(listItem);
-//     });
-// }
-
 function generateForecastList(weatherForecast) {
     const forecastList = document.getElementById("forecast_list");
     forecastList.innerHTML = ""; // Clear existing content
@@ -252,7 +218,7 @@ function generateForecastList(weatherForecast) {
                     <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
                     <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
                 </span>
-                <img id="expand_button" src="image/open.png" alt="Click me to expand">
+                <img id="expand_button" src="image/close.png" alt="Click me to expand">
             </div>
             <div class="forecast-details" style="display: none;">
                 <p><strong>Wind:</strong> ${day.forecastWind}</p>
@@ -263,9 +229,9 @@ function generateForecastList(weatherForecast) {
             </div>
         `;
 
-        // Add click event to the expand button
+        // Add click event to the expand
         const expandButton = listItem.querySelector("#expand_button");
-        expandButton.addEventListener("click", () => {
+        listItem.addEventListener("click", () => {
             const details = listItem.querySelector(".forecast-details");
 
             // Toggle the visibility of the details
@@ -274,9 +240,12 @@ function generateForecastList(weatherForecast) {
                 document.querySelectorAll(".forecast-details").forEach(detail => {
                     detail.style.display = "none";
                 });
+                
                 details.style.display = "block"; // Expand the clicked item
+                expandButton.src = "image/open.png";
             } else {
                 details.style.display = "none"; // Collapse the clicked item
+                expandButton.src = "image/close.png";
             }
         });
 
@@ -353,20 +322,20 @@ async function getRegionalWeather(placeName = "Hong Kong Observatory", district 
 async function getWeatherWarning() {
     return getWeather('warningSummary').then(data => {
 
-        // // Sample data for testing
-        data = {
-            "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
-            "WCOLD": {"name": "Cold Weather Warning", "code": "WCOLD", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WFNTSA": {"name": "Flooding Announcement in Northern New Territories", "code": "WFNTSA", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:40:00+08:00"},
-            "WMSGNL": {"name": "Strong Monsoon Signal", "code": "WMSGNL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WL": {"name": "Landslip Warning", "code": "WL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WRAIN": {"name": "Rainstorm Warning Signal", "code": "WRAINR", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WTMW": {"name": "Tsunami Warning", "code": "WTMW", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WTS": {"name": "Thunderstorm Warning", "code": "WTS", "actionCode": "EXTEND", "issueTime": "2020-09-24T11:40:00+08:00", "expireTime": "2020-09-24T19:30:00+08:00"},
-            "WTCSGNL": {"name": "Tropical Cyclone Warning Signal", "code": "TC3", "actionCode": "ISSUE", "type": "Strong Wind Signal No. 3", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WFIRE": {"name": "Fire Danger Warning", "code": "WFIRER", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"}
-        }
+        // Sample data for testing
+        // data = {
+        //     "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
+        //     "WCOLD": {"name": "Cold Weather Warning", "code": "WCOLD", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WFNTSA": {"name": "Flooding Announcement in Northern New Territories", "code": "WFNTSA", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:40:00+08:00"},
+        //     "WMSGNL": {"name": "Strong Monsoon Signal", "code": "WMSGNL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WL": {"name": "Landslip Warning", "code": "WL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WRAIN": {"name": "Rainstorm Warning Signal", "code": "WRAINR", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WTMW": {"name": "Tsunami Warning", "code": "WTMW", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WTS": {"name": "Thunderstorm Warning", "code": "WTS", "actionCode": "EXTEND", "issueTime": "2020-09-24T11:40:00+08:00", "expireTime": "2020-09-24T19:30:00+08:00"},
+        //     "WTCSGNL": {"name": "Tropical Cyclone Warning Signal", "code": "TC3", "actionCode": "ISSUE", "type": "Strong Wind Signal No. 3", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WFIRE": {"name": "Fire Danger Warning", "code": "WFIRER", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"}
+        // }
           
         if (Object.keys(data).length === 0){ 
             return null;
@@ -429,62 +398,62 @@ async function getWarningDetail(warncode, warnName) {
 
     return getWeather('warningInfo').then(data => {
         // Sample data for testing
-        data = {
-            "details": [
-              {
-                "contents": [
-                  "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
-                  "Thunderstorms are expected to occur over Hong Kong.",
-                  "Members of the public are advised to take the following precautions when thunderstorms occur:",
-                  "1. Stay indoors. Seek shelter in buildings if you are engaging in outdoor activities.",
-                  "2. Do not stand on high grounds. Keep away from highly conductive objects, trees or masts."
-                ],
-                "warningStatementCode": "WTS",
-                "updateTime": "2020-09-24T05:00:00+08:00"
-              },
-              {
-                "contents": ["The Strong Monsoon Signal was issued at 11:15 a.m."],
-                "warningStatementCode": "WMSGNL",
-                "updateTime": "2020-09-24T11:15:00+08:00"
-              },
-              {
-                "contents": ["Landslip Warning issued at 11:15 a.m."],
-                "warningStatementCode": "WL",
-                "updateTime": "2020-09-24T11:15:00+08:00"
-              },
-              {
-                "contents": [
-                  "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
-                  "The Hong Kong Observatory is forecasting very hot weather with light winds in Hong Kong today. The risk of heatstroke is high.",
-                  "When engaged in outdoor work or activities, drink plenty of water and avoid overexertion.",
-                  "If not feeling well, take a rest in the shade or cooler place as soon as possible.",
-                  "People staying indoors without air-conditioning should keep windows open as far as possible to ensure adequate ventilation.",
-                  "Avoid prolonged exposure under sunlight. Loose clothing, suitable hats, and UV-blocking sunglasses can reduce the chance of sunburn by solar ultraviolet radiation.",
-                  "Swimmers and those taking part in outdoor activities should use a sunscreen lotion of SPF 15 or above and reapply it frequently.",
-                  "Beware of health and wellbeing of elderly or persons with chronic medical conditions. If you know of them, call or visit them occasionally to check if they need any assistance."
-                ],
-                "warningStatementCode": "WHOT",
-                "updateTime": "2020-09-24T07:00:00+08:00"
-              },
-              {
-                "contents": [
-                  "The Cold Weather Warning has been issued by the Hong Kong Observatory at 11:15 a.m.",
-                  "Cold weather is expected in Hong Kong in the morning and at night today and tomorrow.",
-                  "The minimum temperatures in the urban areas overnight will be around 11 degrees or below. It will be a couple of degrees lower in the northern part of the New Territories and on high ground.",
-                  "People are advised to put on warm clothes and ensure adequate indoor ventilation.",
-                  "As it is very windy in parts of the territory, wind chill effect will be significant.",
-                  "Prolonged exposure to wintry winds may lead to hypothermia.",
-                  "If you know of elderly persons or persons with chronic medical conditions staying alone, please call or visit them occasionally to check if they need any assistance.",
-                  "Owing to icing conditions in Tai Mo Shan, members of the public, motorists, and cyclists should be aware of the danger on slippery roads.",
-                  "Make sure heaters are safe before use, and place them away from any combustibles.",
-                  "Do not light fires indoors as a means to keep warm.",
-                  "Ensure there is plenty of fresh air in your room when using an old-type gas water heater."
-                ],
-                "warningStatementCode": "WCOLD",
-                "updateTime": "2020-09-24T11:15:00+08:00"
-              }
-            ]
-        }
+        // data = {
+        //     "details": [
+        //       {
+        //         "contents": [
+        //           "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
+        //           "Thunderstorms are expected to occur over Hong Kong.",
+        //           "Members of the public are advised to take the following precautions when thunderstorms occur:",
+        //           "1. Stay indoors. Seek shelter in buildings if you are engaging in outdoor activities.",
+        //           "2. Do not stand on high grounds. Keep away from highly conductive objects, trees or masts."
+        //         ],
+        //         "warningStatementCode": "WTS",
+        //         "updateTime": "2020-09-24T05:00:00+08:00"
+        //       },
+        //       {
+        //         "contents": ["The Strong Monsoon Signal was issued at 11:15 a.m."],
+        //         "warningStatementCode": "WMSGNL",
+        //         "updateTime": "2020-09-24T11:15:00+08:00"
+        //       },
+        //       {
+        //         "contents": ["Landslip Warning issued at 11:15 a.m."],
+        //         "warningStatementCode": "WL",
+        //         "updateTime": "2020-09-24T11:15:00+08:00"
+        //       },
+        //       {
+        //         "contents": [
+        //           "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
+        //           "The Hong Kong Observatory is forecasting very hot weather with light winds in Hong Kong today. The risk of heatstroke is high.",
+        //           "When engaged in outdoor work or activities, drink plenty of water and avoid overexertion.",
+        //           "If not feeling well, take a rest in the shade or cooler place as soon as possible.",
+        //           "People staying indoors without air-conditioning should keep windows open as far as possible to ensure adequate ventilation.",
+        //           "Avoid prolonged exposure under sunlight. Loose clothing, suitable hats, and UV-blocking sunglasses can reduce the chance of sunburn by solar ultraviolet radiation.",
+        //           "Swimmers and those taking part in outdoor activities should use a sunscreen lotion of SPF 15 or above and reapply it frequently.",
+        //           "Beware of health and wellbeing of elderly or persons with chronic medical conditions. If you know of them, call or visit them occasionally to check if they need any assistance."
+        //         ],
+        //         "warningStatementCode": "WHOT",
+        //         "updateTime": "2020-09-24T07:00:00+08:00"
+        //       },
+        //       {
+        //         "contents": [
+        //           "The Cold Weather Warning has been issued by the Hong Kong Observatory at 11:15 a.m.",
+        //           "Cold weather is expected in Hong Kong in the morning and at night today and tomorrow.",
+        //           "The minimum temperatures in the urban areas overnight will be around 11 degrees or below. It will be a couple of degrees lower in the northern part of the New Territories and on high ground.",
+        //           "People are advised to put on warm clothes and ensure adequate indoor ventilation.",
+        //           "As it is very windy in parts of the territory, wind chill effect will be significant.",
+        //           "Prolonged exposure to wintry winds may lead to hypothermia.",
+        //           "If you know of elderly persons or persons with chronic medical conditions staying alone, please call or visit them occasionally to check if they need any assistance.",
+        //           "Owing to icing conditions in Tai Mo Shan, members of the public, motorists, and cyclists should be aware of the danger on slippery roads.",
+        //           "Make sure heaters are safe before use, and place them away from any combustibles.",
+        //           "Do not light fires indoors as a means to keep warm.",
+        //           "Ensure there is plenty of fresh air in your room when using an old-type gas water heater."
+        //         ],
+        //         "warningStatementCode": "WCOLD",
+        //         "updateTime": "2020-09-24T11:15:00+08:00"
+        //       }
+        //     ]
+        // }
 
         const name = document.getElementById('warn_name');
         const statement = document.getElementById('warn_statement');

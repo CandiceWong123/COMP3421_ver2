@@ -1,9 +1,10 @@
-.html, body {
-  margin: 0;
-  padding: 20px;
-  background-color: #FFFFFF;
-  color: rgb(0, 0, 0);
-  font-family: "Inter", sans-serif;
+.html,
+body {
+    margin: 0;
+    padding: 20px;
+    background-color: #FFFFFF;
+    color: rgb(0, 0, 0);
+    font-family: "Inter", sans-serif;
 }
 
 /* Style for naviagtion bar */
@@ -13,13 +14,13 @@
     top: 0;
     left: 0;
     width: 100%;
-    z-index: 1000; 
-    background-color: #FFFFFF; 
+    z-index: 1000;
+    background-color: #FFFFFF;
     box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
     padding: 20px 0;
 }
 
-.navbar ul{
+.navbar ul {
     /* min-width: 800px; */
     display: flex;
     justify-content: space-between;
@@ -42,11 +43,12 @@
     color: rgb(0, 0, 0);
 }
 
-#web_icon{
+#web_icon {
     width: 30px;
-    height: 30px;}
+    height: 30px;
+}
 
-.navbar ul a{
+.navbar ul a {
     text-decoration: none;
     color: rgb(0, 0, 0);
 }
@@ -71,40 +73,43 @@
 }
 
 /* Style for body */
-body > div {
+body>div {
     min-width: 600px;
-    background: rgba(242,242,242,0.55);
+    background: rgba(242, 242, 242, 0.55);
     padding: 10px 20px;
     margin: 30px 15%;
-    scroll-margin-top: 90px; 
+    scroll-margin-top: 90px;
 }
 
-body > div h2 {
+body>div h2 {
     font-size: 20px;
     font-weight: 600;
-    color: rgba(39,142,210);
+    color: rgba(39, 142, 210);
     margin: 20px 0;
     padding-left: 10px;
 
 }
 
 /* Style for division 1 - Current weather */
-.c_preview{
+.c_preview {
     display: flex;
-    justify-content: space-evenly; /* Distributes space evenly between items */
-    align-items: center; /* Vertically centers the items */
+    justify-content: space-evenly;
+    /* Distributes space evenly between items */
+    align-items: center;
+    /* Vertically centers the items */
 
 }
 
-.c_values,.c_hk {
+.c_values,
+.c_hk {
     display: flex;
-    flex-direction: row; 
-    justify-content: space-between; 
-    gap: 40px; 
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 40px;
     align-items: flex-start;
 }
 
-.c_preview > .c_values{
+.c_preview>.c_values {
     /* width: 20vw; */
     width: 350px;
     margin-right: 30px;
@@ -119,23 +124,26 @@ ul {
     margin: 0;
 }
 
-#c_city{
+#c_city {
     font-size: 55px;
     font-weight: 500;
     padding-left: 20px;
 }
-#c_icon{
+
+#c_icon {
     width: 125px;
     margin: 0 15px;
     padding-left: 10px;
 }
-#c_temp{
+
+#c_temp {
     width: 120px;
     font-size: 40px;
     font-weight: 450;
     margin-top: 20px;
 }
-#c_condition{
+
+#c_condition {
     width: 200px;
     font-size: 20px;
     font-weight: 400;
@@ -143,7 +151,7 @@ ul {
 }
 
 
-p{
+p {
     padding: 0px 20px;
     font-weight: 300;
     color: #274C77;
@@ -152,28 +160,38 @@ p{
 
 /* Style for division 2 - Warning weather */
 #warning_list {
-    display: flex; 
-    flex-wrap: wrap; /* Allow items to wrap to the next line */
-    justify-content: center; /* Centers the list horizontally */
-    align-items: center; /* Centers the list vertically */
-    list-style: none; /* Removes default bullet points */
-    margin: 20px; /* Ensures no extra margin affects alignment */
-    padding: 0; /* Ensures no extra padding affects alignment */
-    width: 100%; /* Optional: Ensures it spans the full width of the parent */
-    height: 100%; /* Optional: Ensures it spans the full height of the parent */
-    gap: 10px; /* Adds space between items */
+    display: flex;
+    flex-wrap: wrap;
+    /* Allow items to wrap to the next line */
+    justify-content: center;
+    /* Centers the list horizontally */
+    align-items: center;
+    /* Centers the list vertically */
+    list-style: none;
+    /* Removes default bullet points */
+    margin: 20px;
+    /* Ensures no extra margin affects alignment */
+    padding: 0;
+    /* Ensures no extra padding affects alignment */
+    width: 100%;
+    /* Optional: Ensures it spans the full width of the parent */
+    height: 100%;
+    /* Optional: Ensures it spans the full height of the parent */
+    gap: 10px;
+    /* Adds space between items */
 }
 
-#warnings div{
+#warnings div {
     padding: 20px;
 }
 
-#warn_name{
+#warn_name {
     font-size: 18px;
     font-weight: 500;
     color: #264a75;
 }
-#warnings p{
+
+#warnings p {
     padding-top: 5px;
     padding-left: 0px;
 }
@@ -186,7 +204,7 @@ p{
     color: rgb(0, 0, 0);
 }
 
-#warn_icon{
+#warn_icon {
     width: 70px;
     height: 70px;
     margin: 0 20px;
@@ -194,58 +212,63 @@ p{
 
 
 /* Style for division 3 - Regional weather */
-#region > div{
+#region>div {
     display: flex;
-    justify-content: space-evenly; /* Distributes space evenly between items */
-    align-items: flex-start; /* Vertically centers the items */
+    justify-content: space-evenly;
+    /* Distributes space evenly between items */
+    align-items: flex-start;
+    /* Vertically centers the items */
     margin-bottom: 30px;
 }
 
 
-.r_preview{
+.r_preview {
     width: 50%;
     margin-right: 20px;
     align-items: center;
     padding-left: 40px;
 }
 
-#r_region{
+#r_region {
     font-size: 32px;
     font-weight: 480;
     margin-right: 10px;
     margin-bottom: 30px;
 }
 
-#r_temp{
+#r_temp {
     font-size: 32px;
     font-weight: 420;
 }
 
-.r_values{
+.r_values {
     color: #274C77;
     width: 300px;
     margin: 10px 0;
     font-weight: 380;
     display: flex;
-    flex-direction: row; 
-    justify-content: space-between; 
-    gap: 30px; 
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 30px;
     align-items: flex-start;
     line-height: 2.5;
     margin-bottom: 20px;
 }
 
-#region_image{
+#region_image {
     width: 40%;
     height: 230px;
 
     /* height: auto;
     min-height: 200px; 
     max-height: 230px;  */
-    object-fit: cover; /* Crops the image while maintaining the aspect ratio */
-    overflow: hidden; /* Ensures any overflow is hidden */
-    opacity: 0.9; 
-    border-radius: 20px; /* Adds rounded corners with a radius of 30px */
+    object-fit: cover;
+    /* Crops the image while maintaining the aspect ratio */
+    overflow: hidden;
+    /* Ensures any overflow is hidden */
+    opacity: 0.9;
+    border-radius: 20px;
+    /* Adds rounded corners with a radius of 30px */
 }
 
 .search_engine {
@@ -276,15 +299,19 @@ p{
 .search_button:hover {
     background-color: #3e6e8f;
 }
+
 .dropdown_list {
     position: absolute;
     top: 100%;
     width: 200px;
     background: white;
-    border: 1px solid #ddd; /* Light gray border */
-    border-radius: 0 0 8px 8px; /* Rounded bottom only */
+    border: 1px solid #ddd;
+    /* Light gray border */
+    border-radius: 0 0 8px 8px;
+    /* Rounded bottom only */
     max-height: 200px;
-    overflow-y: auto; /* Auto-scroll if needed */
+    overflow-y: auto;
+    /* Auto-scroll if needed */
     padding: 0;
     margin-left: 20px;
     list-style: none;
@@ -297,52 +324,69 @@ p{
 }
 
 .dropdown_item:hover {
-    background: #dbe9f9; /* Light gray hover */
+    background: #dbe9f9;
+    /* Light gray hover */
 }
 
 
 /* Style for division 4 - 9-days forecast */
-.forecast_preview{
+.forecast_preview {
     display: flex;
     align-items: center;
-    justify-content: space-evenly; /* Distributes space evenly between items */
+    justify-content: space-evenly;
+    /* Distributes space evenly between items */
 }
 
-#forecast_report{
+#forecast_report {
     width: 50%;
     float: left;
     margin-right: 30px;
+    /* position: sticky; */
+    top: 40px;
+    /* Adjust this value to set the distance from the top */
+    /* align-self: flex-start;  */
 }
 
-#forecast_list{
+#forecast_list {
     width: 45%;
+    background-color: #fafafa;
+    /* border: 1px solid #8090a4;
+    border-radius: 10px; */
+
 }
 
-#forecast_list li{
+#forecast_list li {
     align-items: right;
-    justify-content: space-between; /* Distributes space evenly between items */
-    display: flex;
-    border-bottom: 1px solid #dadada; /* Adds a light gray underline */
-    padding: 5px 20px; /* Adds spacing above and below the text */
+    justify-content: space-between;
+    /* Distributes space evenly between items */
+    /* display: flex; */
+    border-bottom: 1px solid #dadada;
+    /* Adds a light gray underline */
+    padding: 5px 20px;
+    /* Adds spacing above and below the text */
 }
 
-.f_day{
+.f_day {
     width: 100px;
 }
 
-#forecast_list span{
+#forecast_list span {
     font-size: 14px;
 }
 
-.forecast_preview ul li img{
+.forecast_preview ul li img {
     width: 15px;
     height: 15px;
 }
 
-#expand_button{
+#expand_button {
     width: 10px;
     height: 6px;
     padding-top: 5px;
+}
+
+.forecast-summary:hover {
+    cursor: pointer;
 }
 
 .forecast-item {
@@ -358,15 +402,18 @@ p{
 }
 
 .forecast-details {
-    background-color: #f9f9f9;
-    padding: 10px;
+    background-color: #e3eef5;
+    padding: 5px 0;
     margin-top: 10px;
-    border-radius: 5px;
-    font-size: 14px;
-    color: #333;
-    display: none; /* Initially hidden */
+    border-radius: 0 0 5px 5px;
+    font-size: 12px;
+    display: none;
+    /* Initially hidden */
 }
 
 .forecast-details p {
-    margin: 5px 0; /* Add spacing between paragraphs */
+    margin: 5px 0;
+    /* Add spacing between paragraphs */
+    color: #33373e;
+
 }
