@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>COMP3421-25-P3 Weather API Group Project</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+
+</head>
+<body>
+    
+    <nav class="navbar">
+        <ul>
+            <div class="logo">
+                <li id="web_name">WEATHER</li>
+                <img id="web_icon" src = "image/observatory.png" alt = "Icon">
+            </div>
+
+            <div class="nav_links">
+                <li><a href="#current">Current</a></li>
+                <li><a href="#warnings">Warnings</a></li>
+                <li><a href="#region">Region</a></li>
+                <li><a href="#forecast">Forecast</a></li>
+            </div>
+            <li id="fetch_date">Date</li>
+        </ul>
+    </nav>
+    
+    <br>
+    <br>
+    <br>
+
+    <div id="current">
+        <h2>CURRENT WEATHER</h2>
+        <div class="c_preview"> 
+            <div >
+                <span id="c_city">Hong Kong</span>
+                <br>
+                <div class="c_hk">
+                    <img id="c_icon" src = "image/weather/cloudy.png" alt = "Current Weather Icon">
+                    <ul>
+                        <li id="c_temp">27.2°C</li>
+                        <li id="c_condition">Broken clouds</li>
+                     </ul>
+                </div>
+            </div>
+            <div class="c_values">
+                <ul>
+                    <li>Min temp: <span id="c_min_temp"></span></li>
+                    <li>Max temp: <span id="c_max_temp"></span></li>
+                    <li>Sunrise: <span id="c_sunrise"></span></li>
+                    <li>Sunset: <span id="c_sunset"></span></li>
+                    <li>Moonrise: <span id="c_moonrise"></span></li>
+                    <li>Moonset: <span id="c_moonset"></span></li>
+
+                </ul>
+                <ul>
+                    <li>Rainfall: <span id="c_rainfall"></li>  
+                    <li>Humidity: <span id="c_humidity"></span></li>
+          
+                    <li>UV: <span id="c_uv"></li>            
+                    <li>Visibility: <span id="c_visibility"></li>            
+                </ul>
+            </div>
+        </div>
+        <p id = "c_report">At 7 p.m. the temperature recorded at Hong Kong Observatory was 27 degrees. The relative humidity was 41 per cent.</p>
+    </div>
+
+    <div id="warnings">
+        <h2>WEATHER WARNINGS</h2>
+        <ul id="warning_list">
+            <li ><img id="warn_icon" src = "image/warning/very_hot.png" alt = "Very Hot warning icon"></li>
+            <li ><img id="warn_icon" src = "image/warning/red_fire.png" alt = "Red Fire warning icon"></li>
+
+        </ul>
+        <div >
+            <span id="warn_name">Fire Danger Warning:</span>
+            <p id="warn_statement">The fire danger warning is Red and the fire risk is Extreme.</p>
+        </div>
+
+    </div>
+
+    <div id="region">
+        <h2>REGIONAL WEATHER</h2>
+        <div>
+            <div class = "r_preview">
+                <span id="r_region">Sha Tin</span>
+                <span id="r_temp">28.2°C</span>
+                <div class="r_values">
+                    <ul>
+                        <li id="r_min_temp">Min temp: </li>
+                        <li id="r_humidity">Humidity: </li>
+                        <li id="r_testing">testing1: </li>            
+                    </ul>
+                    <ul>
+                        <li id="r_max_temp">Max temp: </li>
+                        <li id="r_uv">UV: </li>
+                        <li id="r_testing">testing2: </li>            
+                    </ul>
+                </div>
+                <div class = "search_engine">
+                    Search engine area
+                </div>
+            </div>
+            <img id="region_image" src = "image/region/shatin.jpg" alt = "shatin">
+
+        </div>
+    </div>
+
+    <div id="forecast">
+        <h2>9-DAYS FORECAST</h2>
+        <div class = "forecast_preview">
+            <p id="forecast_report">An easterly airstream will affect the coast of Guangdong tomorrow.
+                Visibility will still be relatively low in some areas. With a southerly airstream affecting the coastal areas gradually in the latter part of this week, the weather will be relatively humid over the region. It will be hot during the day.
+                A trough of low pressure is expected to bring showers to Guangdong towards the weekend. The trough of low pressure will weaken early next week. The weather will improve over the coast of Guangdong.</p>
+            
+            <ul id ="forecast_list">
+                <li id="day1">Wed, 16 Apr 
+                    <span class ="f_temp_range">
+                        <img src = "image/weather/cloudy.png" alt = "Current Weather Icon">
+                        <span class="r_max_temp">22</span> | 
+                        <span class="r_max_temp">29</span>°C
+                    </span>
+                    <!-- <img src = "image/weather/cloudy.png" alt = "Current Weather Icon">
+                    <span class="r_max_temp">22</span> | 
+                    <span class="r_max_temp">29</span>°C -->
+                    <img id="expand_button" src = "image/expand.png" alt = "Click me to expand">
+                </li>
+                <li id="day2">Thu, 17 Apr</li>
+                <li id="day3">Fri, 18 Apr</li>
+                <li id="day4">Sat, 19 Apr</li>
+                <li id="day5">Sun, 20 Apr</li>
+                <li id="day6">Mon, 21 Apr</li>
+                <li id="day7">Tue, 22 Apr</li>
+                <li id="day8">Wed, 23 Apr</li>
+                <li id="day9">Thu, 24 Apr</li>
+            </ul>
+        </div>
+    </div>
+
+
+    <script src="script_weather.js"></script>
+
+</body>
+</html>
