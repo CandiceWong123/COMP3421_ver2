@@ -2,33 +2,33 @@
 let date = new Date();
 
 const regions = [
-    {"station": "King's Park", "district": "Yau Tsim Mong"},
-    {"station": "Hong Kong Observatory", "district": "Yau Tsim Mong"},
-    {"station": "Wong Chuk Hang", "district": "Southern District"},
-    {"station": "Ta Kwu Ling", "district": "North District"},
-    {"station": "Lau Fau Shan", "district": "Yuen Long"},
-    {"station": "Tai Po", "district": "Tai Po"},
-    {"station": "Sha Tin", "district": "Sha Tin"},
-    {"station": "Tuen Mun", "district": "Tuen Mun"},
-    {"station": "Tseung Kwan O", "district": "Sai Kung"},
-    {"station": "Sai Kung", "district": "Sai Kung"},
-    {"station": "Cheung Chau", "district": "Islands District"},
-    {"station": "Chek Lap Kok", "district": "Islands District"},
-    {"station": "Tsing Yi", "district": "Kwai Tsing"},
-    {"station": "Shek Kong", "district": "Yuen Long"},
-    {"station": "Tsuen Wan Ho Koon", "district": "Tsuen Wan"},
-    {"station": "Tsuen Wan Shing Mun Valley", "district": "Tsuen Wan"},
-    {"station": "Hong Kong Park", "district": "Central & Western District"},
-    {"station": "Shau Kei Wan", "district": "Eastern District"},
-    {"station": "Kowloon City", "district": "Kowloon City"},
-    {"station": "Happy Valley", "district": "Wan Chai"},
-    {"station": "Wong Tai Sin", "district": "Wong Tai Sin"},
-    {"station": "Stanley", "district": "Southern District"},
-    {"station": "Kwun Tong", "district": "Kwun Tong"},
-    {"station": "Sham Shui Po", "district": "Sham Shui Po"},
-    {"station": "Kai Tak Runway Park", "district": "Kowloon City"},
-    {"station": "Yuen Long Park", "district": "Yuen Long"},
-    {"station": "Tai Mei Tuk", "district": "Tai Po"}
+    {"station": "King's Park", "district": "Yau Tsim Mong", "image_src": "./image/region/kingspark.jpg"},
+    {"station": "Hong Kong Observatory", "district": "Yau Tsim Mong", "image_src": "./image/region/hongkongobservatory.jpg"},
+    {"station": "Wong Chuk Hang", "district": "Southern District", "image_src": "./image/region/wongchukhang.jpg"},
+    {"station": "Ta Kwu Ling", "district": "North District", "image_src": "./image/region/takwuling.jpg"},
+    {"station": "Lau Fau Shan", "district": "Yuen Long", "image_src": "./image/region/laufaushan.jpg"},
+    {"station": "Tai Po", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"},
+    {"station": "Sha Tin", "district": "Sha Tin", "image_src": "./image/region/shatin.jpg"},
+    {"station": "Tuen Mun", "district": "Tuen Mun", "image_src": "./image/region/tuenmun.jpg"},
+    {"station": "Tseung Kwan O", "district": "Sai Kung", "image_src": "./image/region/tseungkwano.jpg"},
+    {"station": "Sai Kung", "district": "Sai Kung", "image_src": "./image/region/saikung.jpg"},
+    {"station": "Cheung Chau", "district": "Islands District", "image_src": "./image/region/cheungchau.jpg"},
+    {"station": "Chek Lap Kok", "district": "Islands District", "image_src": "./image/region/cheklapkok.jpg"},
+    {"station": "Tsing Yi", "district": "Kwai Tsing", "image_src": "./image/region/tsingyi.jpg"},
+    {"station": "Shek Kong", "district": "Yuen Long", "image_src": "./image/region/shekkong.jpg"},
+    {"station": "Tsuen Wan Ho Koon", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanhokoon.jpg"},
+    {"station": "Tsuen Wan Shing Mun Valley", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanshingmunvalley.jpg"},
+    {"station": "Hong Kong Park", "district": "Central & Western District", "image_src": "./image/region/hongkongpark.jpg"},
+    {"station": "Shau Kei Wan", "district": "Eastern District", "image_src": "./image/region/shaukeiwan.jpg"},
+    {"station": "Kowloon City", "district": "Kowloon City", "image_src": "./image/region/kowlooncity.jpg"},
+    {"station": "Happy Valley", "district": "Wan Chai", "image_src": "./image/region/happyvalley.jpg"},
+    {"station": "Wong Tai Sin", "district": "Wong Tai Sin", "image_src": "./image/region/wongtaisin.jpg"},
+    {"station": "Stanley", "district": "Southern District", "image_src": "./image/region/stanley.jpg"},
+    {"station": "Kwun Tong", "district": "Kwun Tong", "image_src": "./image/region/kwuntong.jpg"},
+    {"station": "Sham Shui Po", "district": "Sham Shui Po", "image_src": "./image/region/shamshuipo.jpg"},
+    {"station": "Kai Tak Runway Park", "district": "Kowloon City", "image_src": "./image/region/kaitakrunwaypark.jpg"},
+    {"station": "Yuen Long Park", "district": "Yuen Long", "image_src": "./image/region/yuenlongpark.jpg"},
+    {"station": "Tai Mei Tuk", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"}
 ]
 
 // When the window loads, fetch the weather data
@@ -229,7 +229,7 @@ function determineWeather(forecast){
 async function getRegionalWeather(placeName = "Hong Kong Observatory", district = "Yau Tsim Mong") {
     return getWeather('current').then(data => {
         let humidity = data.humidity.data[0].value || 0;
-        let uvIndex = data.uvindex.data[0].value || data.uvindex || "-";
+         let uvIndex = data.uvindex.data[0].value || data.uvindex || "-";
         let temperature = data.temperature.data.find(item => item.place === placeName) || "-";
         let rainfall = data.rainfall.data.find(item => item.place === district) || "-";
 
@@ -488,7 +488,7 @@ function searchRegion(){
     }else{
         let station = selectedRegion.station;
         let district = selectedRegion.district;
-
+        document.getElementById('region_image').src = selectedRegion.image_src;
         document.getElementById('r_region').innerText = station;
 
         // Update regional rainfall
