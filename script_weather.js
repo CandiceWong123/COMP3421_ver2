@@ -31,45 +31,6 @@ const regions = [
     {"code":"YLP","station": "Yuen Long Park", "district": "Yuen Long", "image_src": "./image/region/yuenlongpark.jpg"},
 ]
 
-// const regions = [
-//     {"station": "King's Park", "district": "Yau Tsim Mong", "image_src": "./image/region/kingspark.jpg"},
-//     {"station": "Hong Kong Observatory", "district": "Yau Tsim Mong", "image_src": "./image/region/hongkongobservatory.jpg"},
-//     {"station": "Wong Chuk Hang", "district": "Southern District", "image_src": "./image/region/wongchukhang.jpg"},
-//     {"station": "Ta Kwu Ling", "district": "North District", "image_src": "./image/region/takwuling.jpg"},
-//     {"station": "Lau Fau Shan", "district": "Yuen Long", "image_src": "./image/region/laufaushan.jpg"},
-//     {"station": "Tai Po", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"},
-//     {"station": "Sha Tin", "district": "Sha Tin", "image_src": "./image/region/shatin.jpg"},
-//     {"station": "Tuen Mun", "district": "Tuen Mun", "image_src": "./image/region/tuenmun.jpg"},
-//     {"station": "Tseung Kwan O", "district": "Sai Kung", "image_src": "./image/region/tseungkwano.jpg"},
-//     {"station": "Sai Kung", "district": "Sai Kung", "image_src": "./image/region/saikung.jpg"},
-//     {"station": "Cheung Chau", "district": "Islands District", "image_src": "./image/region/cheungchau.jpg"},
-//     {"station": "Chek Lap Kok", "district": "Islands District", "image_src": "./image/region/cheklapkok.jpg"},
-//     {"station": "Tsing Yi", "district": "Kwai Tsing", "image_src": "./image/region/tsingyi.jpg"},
-//     {"station": "Shek Kong", "district": "Yuen Long", "image_src": "./image/region/shekkong.jpg"},
-//     {"station": "Tsuen Wan Ho Koon", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanhokoon.jpg"},
-//     {"station": "Tsuen Wan Shing Mun Valley", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanshingmunvalley.jpg"},
-//     {"station": "Hong Kong Park", "district": "Central & Western District", "image_src": "./image/region/hongkongpark.jpg"},
-//     {"station": "Shau Kei Wan", "district": "Eastern District", "image_src": "./image/region/shaukeiwan.jpg"},
-//     {"station": "Kowloon City", "district": "Kowloon City", "image_src": "./image/region/kowlooncity.jpg"},
-//     {"station": "Happy Valley", "district": "Wan Chai", "image_src": "./image/region/happyvalley.jpg"},
-//     {"station": "Wong Tai Sin", "district": "Wong Tai Sin", "image_src": "./image/region/wongtaisin.jpg"},
-//     {"station": "Stanley", "district": "Southern District", "image_src": "./image/region/stanley.jpg"},
-//     {"station": "Kwun Tong", "district": "Kwun Tong", "image_src": "./image/region/kwuntong.jpg"},
-//     {"station": "Sham Shui Po", "district": "Sham Shui Po", "image_src": "./image/region/shamshuipo.jpg"},
-//     {"station": "Kai Tak Runway Park", "district": "Kowloon City", "image_src": "./image/region/kaitakrunwaypark.jpg"},
-//     {"station": "Yuen Long Park", "district": "Yuen Long", "image_src": "./image/region/yuenlongpark.jpg"},
-//     {"station": "Tai Mei Tuk", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"}
-// ]
-
-let weatherImages = {
-    "Sunny": "./image/weather/sunny.png",
-    "Cloudy": "./image/weather/cloudy.png",
-    "Shower rain": "./image/weather/rainny.png",
-    "Rainstorm": "./image/weather/rainstorm.png",
-    "Partly cloudy": "./image/weather/sunny_cloudy.png",
-    "Drizzle": "./image/weather/sunny_rainny.png",
-};
-
 function toggleTheme() {
     style = document.getElementById("pagestyle").getAttribute("href");
     if (style == "style_light.css"){
@@ -100,13 +61,12 @@ function toggleTheme() {
     }
 }
 
-
 // When the window loads, fetch the weather data
 window.onload = function() {
     const fetchDateElement = document.getElementById('fetch_date');
     if (fetchDateElement) {
         const updateDate = () => {
-            const now = date;
+            const now = new Date();
             now.setHours(now.getHours() + 8); // Adjust to Hong Kong timezone (UTC+8)
             const formattedDate = now.toISOString().slice(0, 19).replace('T', ' ');
             fetchDateElement.textContent = "Last update on " + formattedDate;        };
@@ -132,7 +92,7 @@ window.onload = function() {
     // // Update temperature, humidity, UV index, and max rainfall
     getRegionalWeather("Hong Kong Observatory","Yau Tsim Mong").then(data => {
         document.getElementById('c_humidity').innerText = data.humidity + " %";
-        document.getElementById('c_uv').innerText = data.uvIndex; //test
+        document.getElementById('c_uv').innerText = data.uvIndex;
         document.getElementById('c_temp').innerText = data.temperature + " °C";
         document.getElementById('c_rainfall').innerText = data.rainfall + " mm";
     })
@@ -403,19 +363,19 @@ async function getWeatherWarning() {
     return getWeather('warningSummary').then(data => {
 
         // Sample data for testing
-        data = {
-            "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
-            "WCOLD": {"name": "Cold Weather Warning", "code": "WCOLD", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WFNTSA": {"name": "Flooding Announcement in Northern New Territories", "code": "WFNTSA", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:40:00+08:00"},
-            "WMSGNL": {"name": "Strong Monsoon Signal", "code": "WMSGNL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WL": {"name": "Landslip Warning", "code": "WL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WRAIN": {"name": "Rainstorm Warning Signal", "code": "WRAINR", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WTMW": {"name": "Tsunami Warning", "code": "WTMW", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WTS": {"name": "Thunderstorm Warning", "code": "WTS", "actionCode": "EXTEND", "issueTime": "2020-09-24T11:40:00+08:00", "expireTime": "2020-09-24T19:30:00+08:00"},
-            "WTCSGNL": {"name": "Tropical Cyclone Warning Signal", "code": "TC3", "actionCode": "ISSUE", "type": "Strong Wind Signal No. 3", "issueTime": "2020-09-24T11:15:00+08:00"},
-            "WFIRE": {"name": "Fire Danger Warning", "code": "WFIRER", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"}
-        }
+        // data = {
+        //     "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
+        //     "WCOLD": {"name": "Cold Weather Warning", "code": "WCOLD", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WFNTSA": {"name": "Flooding Announcement in Northern New Territories", "code": "WFNTSA", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:40:00+08:00"},
+        //     "WMSGNL": {"name": "Strong Monsoon Signal", "code": "WMSGNL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WL": {"name": "Landslip Warning", "code": "WL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WRAIN": {"name": "Rainstorm Warning Signal", "code": "WRAINR", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WTMW": {"name": "Tsunami Warning", "code": "WTMW", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WTS": {"name": "Thunderstorm Warning", "code": "WTS", "actionCode": "EXTEND", "issueTime": "2020-09-24T11:40:00+08:00", "expireTime": "2020-09-24T19:30:00+08:00"},
+        //     "WTCSGNL": {"name": "Tropical Cyclone Warning Signal", "code": "TC3", "actionCode": "ISSUE", "type": "Strong Wind Signal No. 3", "issueTime": "2020-09-24T11:15:00+08:00"},
+        //     "WFIRE": {"name": "Fire Danger Warning", "code": "WFIRER", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"}
+        // }
           
         if (Object.keys(data).length === 0){ 
             return null;
@@ -433,14 +393,14 @@ async function getWeatherWarning() {
 
 // Get the weather image path
 function getWeatherImage(weather){
-    // const weatherImages = {
-    //     "Sunny": "./image/weather/sunny.png",
-    //     "Cloudy": "./image/weather/cloudy.png",
-    //     "Shower rain": "./image/weather/rainny.png",
-    //     "Rainstorm": "./image/weather/rainstorm.png",
-    //     "Partly cloudy": "./image/weather/sunny_cloudy.png",
-    //     "Drizzle": "./image/weather/sunny_rainny.png",
-    // };
+    const weatherImages = {
+        "Sunny": "./image/weather/sunny.png",
+        "Cloudy": "./image/weather/cloudy.png",
+        "Shower rain": "./image/weather/rainny.png",
+        "Rainstorm": "./image/weather/rainstorm.png",
+        "Partly cloudy": "./image/weather/sunny_cloudy.png",
+        "Drizzle": "./image/weather/sunny_rainny.png",
+    };
     return weatherImages[weather] || "unknown";
 }
 
@@ -478,62 +438,62 @@ async function getWarningDetail(warncode, warnName) {
 
     return getWeather('warningInfo').then(data => {
         // Sample data for testing
-        data = {
-            "details": [
-              {
-                "contents": [
-                  "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
-                  "Thunderstorms are expected to occur over Hong Kong.",
-                  "Members of the public are advised to take the following precautions when thunderstorms occur:",
-                  "1. Stay indoors. Seek shelter in buildings if you are engaging in outdoor activities.",
-                  "2. Do not stand on high grounds. Keep away from highly conductive objects, trees or masts."
-                ],
-                "warningStatementCode": "WTS",
-                "updateTime": "2020-09-24T05:00:00+08:00"
-              },
-              {
-                "contents": ["The Strong Monsoon Signal was issued at 11:15 a.m."],
-                "warningStatementCode": "WMSGNL",
-                "updateTime": "2020-09-24T11:15:00+08:00"
-              },
-              {
-                "contents": ["Landslip Warning issued at 11:15 a.m."],
-                "warningStatementCode": "WL",
-                "updateTime": "2020-09-24T11:15:00+08:00"
-              },
-              {
-                "contents": [
-                  "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
-                  "The Hong Kong Observatory is forecasting very hot weather with light winds in Hong Kong today. The risk of heatstroke is high.",
-                  "When engaged in outdoor work or activities, drink plenty of water and avoid overexertion.",
-                  "If not feeling well, take a rest in the shade or cooler place as soon as possible.",
-                  "People staying indoors without air-conditioning should keep windows open as far as possible to ensure adequate ventilation.",
-                  "Avoid prolonged exposure under sunlight. Loose clothing, suitable hats, and UV-blocking sunglasses can reduce the chance of sunburn by solar ultraviolet radiation.",
-                  "Swimmers and those taking part in outdoor activities should use a sunscreen lotion of SPF 15 or above and reapply it frequently.",
-                  "Beware of health and wellbeing of elderly or persons with chronic medical conditions. If you know of them, call or visit them occasionally to check if they need any assistance."
-                ],
-                "warningStatementCode": "WHOT",
-                "updateTime": "2020-09-24T07:00:00+08:00"
-              },
-              {
-                "contents": [
-                  "The Cold Weather Warning has been issued by the Hong Kong Observatory at 11:15 a.m.",
-                  "Cold weather is expected in Hong Kong in the morning and at night today and tomorrow.",
-                  "The minimum temperatures in the urban areas overnight will be around 11 degrees or below. It will be a couple of degrees lower in the northern part of the New Territories and on high ground.",
-                  "People are advised to put on warm clothes and ensure adequate indoor ventilation.",
-                  "As it is very windy in parts of the territory, wind chill effect will be significant.",
-                  "Prolonged exposure to wintry winds may lead to hypothermia.",
-                  "If you know of elderly persons or persons with chronic medical conditions staying alone, please call or visit them occasionally to check if they need any assistance.",
-                  "Owing to icing conditions in Tai Mo Shan, members of the public, motorists, and cyclists should be aware of the danger on slippery roads.",
-                  "Make sure heaters are safe before use, and place them away from any combustibles.",
-                  "Do not light fires indoors as a means to keep warm.",
-                  "Ensure there is plenty of fresh air in your room when using an old-type gas water heater."
-                ],
-                "warningStatementCode": "WCOLD",
-                "updateTime": "2020-09-24T11:15:00+08:00"
-              }
-            ]
-        }
+        // data = {
+        //     "details": [
+        //       {
+        //         "contents": [
+        //           "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
+        //           "Thunderstorms are expected to occur over Hong Kong.",
+        //           "Members of the public are advised to take the following precautions when thunderstorms occur:",
+        //           "1. Stay indoors. Seek shelter in buildings if you are engaging in outdoor activities.",
+        //           "2. Do not stand on high grounds. Keep away from highly conductive objects, trees or masts."
+        //         ],
+        //         "warningStatementCode": "WTS",
+        //         "updateTime": "2020-09-24T05:00:00+08:00"
+        //       },
+        //       {
+        //         "contents": ["The Strong Monsoon Signal was issued at 11:15 a.m."],
+        //         "warningStatementCode": "WMSGNL",
+        //         "updateTime": "2020-09-24T11:15:00+08:00"
+        //       },
+        //       {
+        //         "contents": ["Landslip Warning issued at 11:15 a.m."],
+        //         "warningStatementCode": "WL",
+        //         "updateTime": "2020-09-24T11:15:00+08:00"
+        //       },
+        //       {
+        //         "contents": [
+        //           "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
+        //           "The Hong Kong Observatory is forecasting very hot weather with light winds in Hong Kong today. The risk of heatstroke is high.",
+        //           "When engaged in outdoor work or activities, drink plenty of water and avoid overexertion.",
+        //           "If not feeling well, take a rest in the shade or cooler place as soon as possible.",
+        //           "People staying indoors without air-conditioning should keep windows open as far as possible to ensure adequate ventilation.",
+        //           "Avoid prolonged exposure under sunlight. Loose clothing, suitable hats, and UV-blocking sunglasses can reduce the chance of sunburn by solar ultraviolet radiation.",
+        //           "Swimmers and those taking part in outdoor activities should use a sunscreen lotion of SPF 15 or above and reapply it frequently.",
+        //           "Beware of health and wellbeing of elderly or persons with chronic medical conditions. If you know of them, call or visit them occasionally to check if they need any assistance."
+        //         ],
+        //         "warningStatementCode": "WHOT",
+        //         "updateTime": "2020-09-24T07:00:00+08:00"
+        //       },
+        //       {
+        //         "contents": [
+        //           "The Cold Weather Warning has been issued by the Hong Kong Observatory at 11:15 a.m.",
+        //           "Cold weather is expected in Hong Kong in the morning and at night today and tomorrow.",
+        //           "The minimum temperatures in the urban areas overnight will be around 11 degrees or below. It will be a couple of degrees lower in the northern part of the New Territories and on high ground.",
+        //           "People are advised to put on warm clothes and ensure adequate indoor ventilation.",
+        //           "As it is very windy in parts of the territory, wind chill effect will be significant.",
+        //           "Prolonged exposure to wintry winds may lead to hypothermia.",
+        //           "If you know of elderly persons or persons with chronic medical conditions staying alone, please call or visit them occasionally to check if they need any assistance.",
+        //           "Owing to icing conditions in Tai Mo Shan, members of the public, motorists, and cyclists should be aware of the danger on slippery roads.",
+        //           "Make sure heaters are safe before use, and place them away from any combustibles.",
+        //           "Do not light fires indoors as a means to keep warm.",
+        //           "Ensure there is plenty of fresh air in your room when using an old-type gas water heater."
+        //         ],
+        //         "warningStatementCode": "WCOLD",
+        //         "updateTime": "2020-09-24T11:15:00+08:00"
+        //       }
+        //     ]
+        // }
 
         const name = document.getElementById('warn_name');
         const statement = document.getElementById('warn_statement');
@@ -628,7 +588,7 @@ function searchRegion(){
     }
 
     const selectedRegion = regions.find(region => region.station === searchInput.value);
-
+    searchInput.value = "";
 
     if (!selectedRegion){
         searchInput.placeholder = "No region found.";
@@ -662,27 +622,14 @@ function searchRegion(){
             console.error("Error fetching visibility data:", error);
         });
 
-
-        // console.log("Select station:", selectedRegion.station);
-
-        // console.log("Selected region:", selectedRegion.code);
-
-        //getStationData(selectedRegion.code);
-
-        // const min_max_temp = getStationData(selectedRegion.code);
         getStationData(selectedRegion.code).then(data => {
             document.getElementById("r_max_temp").innerText = data.maxTemp + " °C";
             document.getElementById("r_min_temp").innerText = data.minTemp + " °C";
         }).catch(error => {
             console.error("Error fetching min-max temperature:", error);
         });
-
-
-
-        // document.getElementById("r_max_temp").innerText = min_max_temp.minTemp;
-        // document.getElementById("r_min_temp").innerText = min_max_temp.maxTemp;
-
     }
+    
 }
 
 // Fetch data from HK Observatory API
@@ -712,8 +659,6 @@ async function getStationData(station) {
         .then(data => {
             const maxTemp = data.data[0]["Maximum Air Temperature Since Midnight(degree Celsius)"];
             const minTemp = data.data[0]["Minimum Air Temperature Since Midnight(degree Celsius)"];
-            // console.log("Max Temperature:", Math.round(parseFloat(maxTemp)), "°C");
-            // console.log("Min Temperature:", Math.round(parseFloat(minTemp)), "°C");
             return {"minTemp":Math.round(parseFloat(minTemp)), "maxTemp":Math.round(parseFloat(maxTemp))}
 
         })
