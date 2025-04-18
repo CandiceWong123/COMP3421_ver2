@@ -2,34 +2,64 @@
 let date = new Date();
 
 const regions = [
-    {"station": "King's Park", "district": "Yau Tsim Mong", "image_src": "./image/region/kingspark.jpg"},
-    {"station": "Hong Kong Observatory", "district": "Yau Tsim Mong", "image_src": "./image/region/hongkongobservatory.jpg"},
-    {"station": "Wong Chuk Hang", "district": "Southern District", "image_src": "./image/region/wongchukhang.jpg"},
-    {"station": "Ta Kwu Ling", "district": "North District", "image_src": "./image/region/takwuling.jpg"},
-    {"station": "Lau Fau Shan", "district": "Yuen Long", "image_src": "./image/region/laufaushan.jpg"},
-    {"station": "Tai Po", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"},
-    {"station": "Sha Tin", "district": "Sha Tin", "image_src": "./image/region/shatin.jpg"},
-    {"station": "Tuen Mun", "district": "Tuen Mun", "image_src": "./image/region/tuenmun.jpg"},
-    {"station": "Tseung Kwan O", "district": "Sai Kung", "image_src": "./image/region/tseungkwano.jpg"},
-    {"station": "Sai Kung", "district": "Sai Kung", "image_src": "./image/region/saikung.jpg"},
-    {"station": "Cheung Chau", "district": "Islands District", "image_src": "./image/region/cheungchau.jpg"},
-    {"station": "Chek Lap Kok", "district": "Islands District", "image_src": "./image/region/cheklapkok.jpg"},
-    {"station": "Tsing Yi", "district": "Kwai Tsing", "image_src": "./image/region/tsingyi.jpg"},
-    {"station": "Shek Kong", "district": "Yuen Long", "image_src": "./image/region/shekkong.jpg"},
-    {"station": "Tsuen Wan Ho Koon", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanhokoon.jpg"},
-    {"station": "Tsuen Wan Shing Mun Valley", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanshingmunvalley.jpg"},
-    {"station": "Hong Kong Park", "district": "Central & Western District", "image_src": "./image/region/hongkongpark.jpg"},
-    {"station": "Shau Kei Wan", "district": "Eastern District", "image_src": "./image/region/shaukeiwan.jpg"},
-    {"station": "Kowloon City", "district": "Kowloon City", "image_src": "./image/region/kowlooncity.jpg"},
-    {"station": "Happy Valley", "district": "Wan Chai", "image_src": "./image/region/happyvalley.jpg"},
-    {"station": "Wong Tai Sin", "district": "Wong Tai Sin", "image_src": "./image/region/wongtaisin.jpg"},
-    {"station": "Stanley", "district": "Southern District", "image_src": "./image/region/stanley.jpg"},
-    {"station": "Kwun Tong", "district": "Kwun Tong", "image_src": "./image/region/kwuntong.jpg"},
-    {"station": "Sham Shui Po", "district": "Sham Shui Po", "image_src": "./image/region/shamshuipo.jpg"},
-    {"station": "Kai Tak Runway Park", "district": "Kowloon City", "image_src": "./image/region/kaitakrunwaypark.jpg"},
-    {"station": "Yuen Long Park", "district": "Yuen Long", "image_src": "./image/region/yuenlongpark.jpg"},
-    {"station": "Tai Mei Tuk", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"}
+    {"code":"CLK","station": "Chek Lap Kok", "district": "Islands District", "image_src": "./image/region/cheklapkok.jpg"},
+    {"code":"CCH","station": "Cheung Chau", "district": "Islands District", "image_src": "./image/region/cheungchau.jpeg"},
+    {"code":"HVY","station": "Happy Valley", "district": "Wan Chai", "image_src": "./image/region/happyvalley.jpg"},
+    {"code":"HKO","station": "Hong Kong Observatory", "district": "Yau Tsim Mong", "image_src": "./image/region/hongkongobservatory.jpg"},
+    {"code":"HKP","station": "Hong Kong Park", "district": "Central & Western District", "image_src": "./image/region/hongkongpark.jpg"},
+    {"code":"KTR","station": "Kai Tak Runway Park", "district": "Kowloon City", "image_src": "./image/region/kaitakrunwaypark.jpg"},
+    {"code":"KP","station": "King's Park", "district": "Yau Tsim Mong", "image_src": "./image/region/kingspark.jpg"},
+    {"code":"KLT","station": "Kowloon City", "district": "Kowloon City", "image_src": "./image/region/kowlooncity.jpg"},
+    {"code":"KWT","station": "Kwun Tong", "district": "Kwun Tong", "image_src": "./image/region/kwuntong.jpg"},
+    {"code":"LFS","station": "Lau Fau Shan", "district": "Yuen Long", "image_src": "./image/region/laufaushan.jpg"},
+    {"code":"SKG","station": "Sai Kung", "district": "Sai Kung", "image_src": "./image/region/saikung.jpg"},
+    {"code":"SHA","station": "Sha Tin", "district": "Sha Tin", "image_src": "./image/region/shatin.jpg"},
+    {"code":"SSP","station": "Sham Shui Po", "district": "Sham Shui Po", "image_src": "./image/region/shamshuipo.jpg"},
+    {"code":"SKW","station": "Shau Kei Wan", "district": "Eastern District", "image_src": "./image/region/shaukeiwan.jpg"},
+    {"code":"SEK","station": "Shek Kong", "district": "Yuen Long", "image_src": "./image/region/shekkong.jpg"},
+    {"code":"STY","station": "Stanley", "district": "Southern District", "image_src": "./image/region/stanley.jpg"},
+    {"code":"TKL","station": "Ta Kwu Ling", "district": "North District", "image_src": "./image/region/takwuling.jpg"},
+    {"code":"TMT","station": "Tai Mei Tuk", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"},
+    {"code":"TPO","station": "Tai Po", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"},
+    {"code":"JKB","station": "Tseung Kwan O", "district": "Sai Kung", "image_src": "./image/region/tseungkwano.jpg"},
+    {"code":"TYW","station": "Tsing Yi", "district": "Kwai Tsing", "image_src": "./image/region/tsingyi.jpg"},
+    {"code":"TWH","station": "Tsuen Wan Ho Koon", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanhokoon.jpg"},
+    {"code":"TWN","station": "Tsuen Wan Shing Mun Valley", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanshingmunvalley.jpg"},
+    {"code":"TUN","station": "Tuen Mun", "district": "Tuen Mun", "image_src": "./image/region/tuenmun.jpg"},
+    {"code":"HKS","station": "Wong Chuk Hang", "district": "Southern District", "image_src": "./image/region/wongchukhang.JPG"},
+    {"code":"WTS","station": "Wong Tai Sin", "district": "Wong Tai Sin", "image_src": "./image/region/wongtaisin.jpg"},
+    {"code":"YLP","station": "Yuen Long Park", "district": "Yuen Long", "image_src": "./image/region/yuenlongpark.jpg"},
 ]
+
+// const regions = [
+//     {"station": "King's Park", "district": "Yau Tsim Mong", "image_src": "./image/region/kingspark.jpg"},
+//     {"station": "Hong Kong Observatory", "district": "Yau Tsim Mong", "image_src": "./image/region/hongkongobservatory.jpg"},
+//     {"station": "Wong Chuk Hang", "district": "Southern District", "image_src": "./image/region/wongchukhang.jpg"},
+//     {"station": "Ta Kwu Ling", "district": "North District", "image_src": "./image/region/takwuling.jpg"},
+//     {"station": "Lau Fau Shan", "district": "Yuen Long", "image_src": "./image/region/laufaushan.jpg"},
+//     {"station": "Tai Po", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"},
+//     {"station": "Sha Tin", "district": "Sha Tin", "image_src": "./image/region/shatin.jpg"},
+//     {"station": "Tuen Mun", "district": "Tuen Mun", "image_src": "./image/region/tuenmun.jpg"},
+//     {"station": "Tseung Kwan O", "district": "Sai Kung", "image_src": "./image/region/tseungkwano.jpg"},
+//     {"station": "Sai Kung", "district": "Sai Kung", "image_src": "./image/region/saikung.jpg"},
+//     {"station": "Cheung Chau", "district": "Islands District", "image_src": "./image/region/cheungchau.jpg"},
+//     {"station": "Chek Lap Kok", "district": "Islands District", "image_src": "./image/region/cheklapkok.jpg"},
+//     {"station": "Tsing Yi", "district": "Kwai Tsing", "image_src": "./image/region/tsingyi.jpg"},
+//     {"station": "Shek Kong", "district": "Yuen Long", "image_src": "./image/region/shekkong.jpg"},
+//     {"station": "Tsuen Wan Ho Koon", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanhokoon.jpg"},
+//     {"station": "Tsuen Wan Shing Mun Valley", "district": "Tsuen Wan", "image_src": "./image/region/tsuenwanshingmunvalley.jpg"},
+//     {"station": "Hong Kong Park", "district": "Central & Western District", "image_src": "./image/region/hongkongpark.jpg"},
+//     {"station": "Shau Kei Wan", "district": "Eastern District", "image_src": "./image/region/shaukeiwan.jpg"},
+//     {"station": "Kowloon City", "district": "Kowloon City", "image_src": "./image/region/kowlooncity.jpg"},
+//     {"station": "Happy Valley", "district": "Wan Chai", "image_src": "./image/region/happyvalley.jpg"},
+//     {"station": "Wong Tai Sin", "district": "Wong Tai Sin", "image_src": "./image/region/wongtaisin.jpg"},
+//     {"station": "Stanley", "district": "Southern District", "image_src": "./image/region/stanley.jpg"},
+//     {"station": "Kwun Tong", "district": "Kwun Tong", "image_src": "./image/region/kwuntong.jpg"},
+//     {"station": "Sham Shui Po", "district": "Sham Shui Po", "image_src": "./image/region/shamshuipo.jpg"},
+//     {"station": "Kai Tak Runway Park", "district": "Kowloon City", "image_src": "./image/region/kaitakrunwaypark.jpg"},
+//     {"station": "Yuen Long Park", "district": "Yuen Long", "image_src": "./image/region/yuenlongpark.jpg"},
+//     {"station": "Tai Mei Tuk", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"}
+// ]
 
 let weatherImages = {
     "Sunny": "./image/weather/sunny.png",
@@ -50,13 +80,10 @@ function toggleTheme() {
         let webicon = document.getElementById("web_icon");
         webicon.src = webicon.src.replace("image/", "image/dark_mode/");
 
-
         // Update all f_icon elements
         document.querySelectorAll(".f_icon").forEach(fIcon => {
             fIcon.src = fIcon.src.replace("image/", "image/dark_mode/");
         });
-
-
     }
     else if (style == "style_dark.css"){
         document.getElementById("pagestyle").setAttribute("href", "style_light.css");
@@ -66,14 +93,11 @@ function toggleTheme() {
         let webicon = document.getElementById("web_icon");
         webicon.src = webicon.src.replace("image/dark_mode/", "image/");
 
-        
         // Update all f_icon elements
         document.querySelectorAll(".f_icon").forEach(fIcon => {
             fIcon.src = fIcon.src.replace("image/dark_mode/", "image/");
         });
-
     }
-
 }
 
 
@@ -108,7 +132,7 @@ window.onload = function() {
     // // Update temperature, humidity, UV index, and max rainfall
     getRegionalWeather("Hong Kong Observatory","Yau Tsim Mong").then(data => {
         document.getElementById('c_humidity').innerText = data.humidity + " %";
-        document.getElementById('c_uv').innerText = data.uvIndex;
+        document.getElementById('c_uv').innerText = data.uvIndex; //test
         document.getElementById('c_temp').innerText = data.temperature + " °C";
         document.getElementById('c_rainfall').innerText = data.rainfall + " mm";
     })
@@ -156,6 +180,13 @@ window.onload = function() {
     }
     ).catch(error => {
         console.error("Error fetching visibility data:", error);
+    });
+
+    getStationData("HKO").then(data => {
+        document.getElementById("c_max_temp").innerText = data.maxTemp + " °C";
+        document.getElementById("c_min_temp").innerText = data.minTemp + " °C";
+    }).catch(error => {
+        console.error("Error fetching min-max temperature:", error);
     });
 
     // Part 2: Fetch weather warning
@@ -217,6 +248,13 @@ window.onload = function() {
         console.error("Error fetching visibility data:", error);
     });
 
+    getStationData("ST").then(data => {
+        document.getElementById("r_max_temp").innerText = data.maxTemp + " °C";
+        document.getElementById("r_min_temp").innerText = data.minTemp + " °C";
+    }).catch(error => {
+        console.error("Error fetching min-max temperature:", error);
+    });
+
     // Initialize the search engine
     regionDropdown();
 
@@ -273,7 +311,8 @@ function generateForecastList(weatherForecast) {
         // Add click event to the expand
         const expandButton = listItem.querySelector("#expand_button");
         listItem.addEventListener("click", () => {
-            const details = listItem.querySelector(".forecast_details");
+        const details = listItem.querySelector(".forecast_details");
+        const style = document.getElementById("pagestyle").getAttribute("href");
 
             // Toggle the visibility of the details
             if (details.style.display === "none") {
@@ -283,10 +322,10 @@ function generateForecastList(weatherForecast) {
                 });
                 
                 details.style.display = "block"; // Expand the clicked item
-                expandButton.src = style == "style_light.css" ? "image/dark_mode/open.png" : "image/open.png";
+                expandButton.src = style == "style_dark.css" ? "image/dark_mode/open.png" : "image/open.png";
             } else {
                 details.style.display = "none"; // Collapse the clicked item
-                expandButton.src = style == "style_light.css" ? "image/dark_mode/close.png" : "image/close.png";
+                expandButton.src = style == "style_dark.css" ? "image/dark_mode/close.png" : "image/close.png";
             }
         });
 
@@ -589,7 +628,7 @@ function searchRegion(){
     }
 
     const selectedRegion = regions.find(region => region.station === searchInput.value);
-    searchInput.value = "";
+
 
     if (!selectedRegion){
         searchInput.placeholder = "No region found.";
@@ -623,6 +662,26 @@ function searchRegion(){
             console.error("Error fetching visibility data:", error);
         });
 
+
+        // console.log("Select station:", selectedRegion.station);
+
+        // console.log("Selected region:", selectedRegion.code);
+
+        //getStationData(selectedRegion.code);
+
+        // const min_max_temp = getStationData(selectedRegion.code);
+        getStationData(selectedRegion.code).then(data => {
+            document.getElementById("r_max_temp").innerText = data.maxTemp + " °C";
+            document.getElementById("r_min_temp").innerText = data.minTemp + " °C";
+        }).catch(error => {
+            console.error("Error fetching min-max temperature:", error);
+        });
+
+
+
+        // document.getElementById("r_max_temp").innerText = min_max_temp.minTemp;
+        // document.getElementById("r_min_temp").innerText = min_max_temp.maxTemp;
+
     }
 }
 
@@ -641,3 +700,41 @@ async function getWeather(type) {
         });
 }
 
+async function getStationData(station) {
+    
+    return fetch(`http://localhost:3000/weather/station-data?station=${station}`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            const maxTemp = data.data[0]["Maximum Air Temperature Since Midnight(degree Celsius)"];
+            const minTemp = data.data[0]["Minimum Air Temperature Since Midnight(degree Celsius)"];
+            // console.log("Max Temperature:", Math.round(parseFloat(maxTemp)), "°C");
+            // console.log("Min Temperature:", Math.round(parseFloat(minTemp)), "°C");
+            return {"minTemp":Math.round(parseFloat(minTemp)), "maxTemp":Math.round(parseFloat(maxTemp))}
+
+        })
+        .catch(error => {
+            console.error("Error:", "Failed to load station data!");
+        });
+}
+
+async function getUVIndexData() {
+    fetch(`http://localhost:3000/weather/uv-index`)
+        .then(response => {
+            if (!response.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+            return response.json();
+        })
+        .then(data => {
+            document.getElementById("output").innerText = JSON.stringify(data, null, 2);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            document.getElementById("output").innerText = "Failed to load UV index data!";
+        });
+}

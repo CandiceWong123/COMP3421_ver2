@@ -28,6 +28,21 @@
     <h3>Rainfall Information API</h3>
     <button onclick="getWeather('rainfallPastHour')">Rainfall in Past Hour</button>
     
+    <h3>Regional Temperature Data API</h3>
+    <select id="stationSelector">
+        <!-- for testing, so I just add these few stations -->
+        <option value="HKO">Hong Kong Observatory</option>
+        <option value="KP">King's Park</option>
+        <option value="SHA">Sha Tin</option>
+        <option value="TUN">Tuen Mun</option>
+        <option value="TPO">Tai Po</option>
+    </select>
+    <button onclick="getStationData()">Get Station Data</button>
+
+    <h3>UV API</h3>
+    <button onclick="getUVIndexData()">Get UV Index Data</button>
+
+
     <pre id="output"></pre>
     <script src="script_test.js"></script>
 </body>
