@@ -3,7 +3,7 @@
 2. cd weather-app
 3. npm install express cors axios csv-parser
 4. node backend/server.js
-5. open browser and navigate http://localhost:8080/frontend/weather.html
+5. open browser and navigate https://myweather-f1eb2.web.app
 
 
 server.js => backend
