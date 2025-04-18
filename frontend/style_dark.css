@@ -92,7 +92,7 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#fetch_date {
+#date_display {
     margin-right: 10px;
     font-weight: 300;
     font-size: 14px;

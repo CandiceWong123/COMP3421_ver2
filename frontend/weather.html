@@ -25,20 +25,19 @@
             </div>
 
             <div class="nav_links">
-                <li><a href="#current">Current</a></li>
-                <li><a href="#warnings">Warnings</a></li>
-                <li><a href="#region">Region</a></li>
-                <li><a href="#forecast">Forecast</a></li>
+                <li><a href="#current" data-i18n="current">Current weather</a></li>
+                <li><a href="#warnings" data-i18n="warnings">Weather warnings</a></li>
+                <li><a href="#region" data-i18n="region">Regional weather</a></li>
+                <li><a href="#forecast"  data-i18n="forecast">9-days forecast</a></li>
             </div>
 
             <div class="nav_buttons">
-                <li><button id = "lang_en">EN</button></li>
-                <li><button id = "lang_chi">中</button></li>
+                <li><button id = "lang_en" onclick="loadTranslations('en')">EN</button></li>
+                <li><button id = "lang_chi" onclick="loadTranslations('tc')">中</button></li>
                 <i id="switch_button" class="fa fa-sun-o" onclick="toggleTheme()"></i>
                 <!-- <li><button id = "style_button"></button></li> -->
             </div>
-            
-            <li id="fetch_date">Date</li>
+            <li id = "date_display"><span data-i18n="last_update">Last update on</span> <span id="fetch_date">Date</span></li>
         </ul>
     </nav>
     
@@ -47,35 +46,35 @@
     <br>
 
     <div id="current">
-        <h2>CURRENT WEATHER</h2>
+        <h2 data-i18n="current_weather">CURRENT WEATHER</h2>
         <div class="c_preview"> 
             <div >
-                <span id="c_city">Hong Kong</span>
+                <span id="c_city" data-i18n="c_city">Hong Kong</span>
                 <br>
                 <div class="c_hk">
                     <img id="c_icon" src = "image/weather/cloudy.png" alt = "Current Weather Icon">
                     <ul>
-                        <li id="c_temp">27.2°C</li>
-                        <li id="c_condition">Broken clouds</li>
-                     </ul>
+                        <li id="c_temp" data-i18n="c_temp">27.2°C</li>
+                        <li id="c_condition" data-i18n="c_condition">Broken clouds</li>
+                    </ul>
                 </div>
             </div>
             <div class="c_values">
                 <ul>
-                    <li>Max temp: <span id="c_max_temp"></li>  
-                    <li>Min temp: <span id="c_min_temp"></li>  
-                    <li>Humidity: <span id="c_humidity"></span></li>
-                    <li>UV: <span id="c_uv"></li>            
-                    <li>Visibility: <span id="c_visibility"></li>
+                    <li><span data-i18n="c_max_temp">Max temp:</span> <span id="c_max_temp"></li>  
+                    <li><span data-i18n="c_min_temp">Min temp:</span> <span id="c_min_temp"></li>  
+                    <li><span data-i18n="c_humidity">Humidity:</span> <span id="c_humidity"></span></li>
+                    <li><span data-i18n="c_uv">UV:</span> <span id="c_uv"></li>            
+                    <li><span data-i18n="c_visibility">Visibility:</span> <span id="c_visibility"></li>
                     <!-- <li>Rainfall: <span id="c_rainfall"></li>   -->
 
                 </ul>
                 <ul>
-                    <li>Rainfall: <span id="c_rainfall"></li>  
-                    <li>Sunrise: <span id="c_sunrise"></span></li>
-                    <li>Sunset: <span id="c_sunset"></span></li>
-                    <li>Moonrise: <span id="c_moonrise"></span></li>
-                    <li>Moonset: <span id="c_moonset"></span></li>            
+                    <li><span data-i18n="c_rainfall">Rainfall: </span> <span id="c_rainfall"></li>  
+                    <li><span data-i18n="c_sunrise">Sunrise: </span> <span id="c_sunrise"></span></li>
+                    <li><span data-i18n="c_sunset">Sunset: </span> <span id="c_sunset"></span></li>
+                    <li><span data-i18n="c_moonrise">Moonrise: </span> <span id="c_moonrise"></span></li>
+                    <li><span data-i18n="c_moonset">Moonset: </span> <span id="c_moonset"></span></li>            
                 </ul>
             </div>
         </div>
@@ -83,7 +82,7 @@
     </div>
 
     <div id="warnings">
-        <h2>WEATHER WARNINGS</h2>
+        <h2 data-i18n="warnings">WEATHER WARNINGS</h2>
         <ul id="warning_list">
         </ul>
         <div >
@@ -94,31 +93,28 @@
     </div>
 
     <div id="region">
-        <h2>REGIONAL WEATHER</h2>
+        <h2 data-i18n="region">REGIONAL WEATHER</h2>
         <div>
             <div class = "r_preview">
-                <span id="r_region">Sha Tin</span>
+                <span data-i18n="r_region" id="r_region">Sha Tin</span>
                 <span id="r_temp">28.2°C</span>
                 <div class="r_values">
                     <ul>
-                        <li>Min temp: <span id="r_min_temp"></span></li>
-                        <li>Max temp: <span id="r_max_temp"></span></li>
-                        <li>Humidity: <span id="r_humidity"></span></li>
+                        <li><span data-i18n="r_min_temp">Min temp:</span> <span id="r_min_temp"></span></li>
+                        <li><span data-i18n="r_max_temp">Max temp:</span> <span id="r_max_temp"></span></li>
+                        <li><span data-i18n="r_humidity">Humidity:</span> <span id="r_humidity"></span></li>
                         <!-- <li>UV: <span id="r_uv"></span></li> -->
                     </ul>
                     <ul>
-                        <li>UV: <span id="r_uv"></span></li>
-                        <li>Visibility: <span id="r_visibility"></span></li>
-                        <li>Rainfall: <span id="r_rainfall"></span></li>
+                        <li><span data-i18n="r_uv">UV:</span> <span id="r_uv"></span></li>
+                        <li><span data-i18n="r_visibility">Visibility:</span> <span id="r_visibility"></span></li>
+                        <li><span data-i18n="r_rainfall">Rainfall:</span> <span id="r_rainfall"></span></li>
                     </ul>
                 </div>
                 <div class = "search_engine">
                     <input id="search_input" type="text" class="search_input" placeholder="Search region">
-                    <button class="search_button" onclick="searchRegion()">Search</button>         
+                    <button class="search_button" onclick="searchRegion()" data-i18n="search_button">Search</button>         
                     <ul class="dropdown_list"></ul>
-
-
-
                 </div>
             </div>
             <img id="region_image" src = "image/region/shatin.jpg" alt = "shatin">
@@ -127,27 +123,11 @@
     </div>
 
     <div id="forecast">
-        <h2>9-DAYS FORECAST</h2>
+        <h2 data-i18n="forecast_9days">9-DAYS FORECAST</h2>
         <div class = "forecast_preview">
-            <p id="forecast_report">Report is loading.</p>
+            <p id="forecast_report" data-i18n="forecast_report">Report is loading.</p>
             
             <ul id ="forecast_list">
-                <li id="day1">Wed, 16 Apr 
-                    <span class ="f_temp_range">
-                        <img src = "image/weather/cloudy.png" alt = "Current Weather Icon">
-                        <span class="r_max_temp">22</span> | 
-                        <span class="r_max_temp">29</span>°C
-                    </span>
-                    <img id="expand_button" src = "image/close.png" alt = "Click me to expand">
-                </li>
-                <li id="day2">Thu, 17 Apr</li>
-                <li id="day3">Fri, 18 Apr</li>
-                <li id="day4">Sat, 19 Apr</li>
-                <li id="day5">Sun, 20 Apr</li>
-                <li id="day6">Mon, 21 Apr</li>
-                <li id="day7">Tue, 22 Apr</li>
-                <li id="day8">Wed, 23 Apr</li>
-                <li id="day9">Thu, 24 Apr</li>
             </ul>
         </div>
     </div>

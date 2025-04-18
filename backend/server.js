@@ -84,12 +84,12 @@ const datasets = {
     rainfallPastHour: { params: { lang: 'en' } } 
 };
 
-const fetchWeatherData = async (dataset, isClimateData, extraParams = {}, isRainfallData = false) => {
+const fetchWeatherData = async (lang = 'en', dataset, isClimateData, extraParams = {}, isRainfallData = false) => {
     try {
         // decide which API to use
         const baseUrl = isRainfallData ? RAINFALL_API_URL : (isClimateData ? CLIMATE_API_URL : API_BASE_URL);
         
-        const queryParams = new URLSearchParams({ lang: 'en', rformat: 'json', ...(dataset ? { dataType: dataset } : {}), ...extraParams }).toString();
+        const queryParams = new URLSearchParams({ lang: lang, rformat: 'json', ...(dataset ? { dataType: dataset } : {}), ...extraParams }).toString();
         const url = `${baseUrl}?${queryParams}`;
 
         console.log(`Fetching data from: ${url}`); 
@@ -172,7 +172,8 @@ app.get('/weather/station-data', async (req, res) => {
 // endpoints
 app.get('/weather/:type', async (req, res) => {
     const type = req.params.type;
-    
+    const lang = req.query.lang || 'en';
+
     const station = req.query.station && STATIONS[req.query.station] ? 
         req.query.station : DEFAULT_STATION;
     
@@ -182,7 +183,7 @@ app.get('/weather/:type', async (req, res) => {
         
         const extraParams = { ...datasets[type].params, station };
         
-        const data = await fetchWeatherData(datasets[type].type, isClimateData, extraParams, isRainfallData);
+        const data = await fetchWeatherData(lang, datasets[type].type, isClimateData, extraParams, isRainfallData);
         res.json(data);
     } else {
         res.status(400).json({ error: 'Invalid dataset type' });

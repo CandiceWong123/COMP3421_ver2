@@ -1,5 +1,8 @@
+let lang = document.documentElement.lang;
+lang = "en"; 
+
 function getWeather(type) {
-    fetch(`http://localhost:3000/weather/${type}`)
+    fetch(`http://localhost:3000/weather/${type}?lang=${lang}`)
         .then(response => {
             if (!response.ok) {
                 throw new Error(`HTTP error! Status: ${response.status}`);

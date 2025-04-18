@@ -5,6 +5,7 @@
 4. node backend/server.js
 5. open browser and navigate http://localhost:8080/frontend/weather.html
 
+
 server.js => backend
 weather.html, script_weather.js => frontend
 test.html, script_test.js => testing api
