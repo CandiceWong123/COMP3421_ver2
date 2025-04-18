@@ -31,6 +31,52 @@ const regions = [
     {"station": "Tai Mei Tuk", "district": "Tai Po", "image_src": "./image/region/taipo.jpg"}
 ]
 
+let weatherImages = {
+    "Sunny": "./image/weather/sunny.png",
+    "Cloudy": "./image/weather/cloudy.png",
+    "Shower rain": "./image/weather/rainny.png",
+    "Rainstorm": "./image/weather/rainstorm.png",
+    "Partly cloudy": "./image/weather/sunny_cloudy.png",
+    "Drizzle": "./image/weather/sunny_rainny.png",
+};
+
+function toggleTheme() {
+    style = document.getElementById("pagestyle").getAttribute("href");
+    if (style == "style_light.css"){
+        document.getElementById("pagestyle").setAttribute("href", "style_dark.css");
+        document.getElementById("switch_button").setAttribute("class", "fa fa-moon-o");
+        let icon = document.getElementById("c_icon");
+        icon.src = icon.src.replace("image/", "image/dark_mode/");
+        let webicon = document.getElementById("web_icon");
+        webicon.src = webicon.src.replace("image/", "image/dark_mode/");
+
+
+        // Update all f_icon elements
+        document.querySelectorAll(".f_icon").forEach(fIcon => {
+            fIcon.src = fIcon.src.replace("image/", "image/dark_mode/");
+        });
+
+
+    }
+    else if (style == "style_dark.css"){
+        document.getElementById("pagestyle").setAttribute("href", "style_light.css");
+        document.getElementById("switch_button").setAttribute("class", "fa fa-sun-o");
+        let icon = document.getElementById("c_icon");
+        icon.src = icon.src.replace("image/dark_mode/", "image/");
+        let webicon = document.getElementById("web_icon");
+        webicon.src = webicon.src.replace("image/dark_mode/", "image/");
+
+        
+        // Update all f_icon elements
+        document.querySelectorAll(".f_icon").forEach(fIcon => {
+            fIcon.src = fIcon.src.replace("image/dark_mode/", "image/");
+        });
+
+    }
+
+}
+
+
 // When the window loads, fetch the weather data
 window.onload = function() {
     const fetchDateElement = document.getElementById('fetch_date');
@@ -181,12 +227,7 @@ window.onload = function() {
     getWeather('forecast').then(data => {
         let report = data.generalSituation;
         document.getElementById('forecast_report').innerText = report;
-
-        console.log(data);
-
         let forecasts = data.weatherForecast;
-        console.log(forecasts);
-        // Generate the forecast list
         generateForecastList(forecasts);
 
     }).catch(error => {
@@ -203,7 +244,7 @@ function generateForecastList(weatherForecast) {
     weatherForecast.forEach((day, index) => {
         const listItem = document.createElement("li");
         listItem.id = `day${index + 1}`;
-        listItem.classList.add("forecast-item"); // Add a class for styling
+        listItem.classList.add("forecast_item"); // Add a class for styling
 
         const forecastDay = day.forecastDate.substring(6);
         const dateObj = new Date(`${day.forecastDate.slice(0, 4)}-${day.forecastDate.slice(4, 6)}-${forecastDay}`);
@@ -211,16 +252,16 @@ function generateForecastList(weatherForecast) {
 
         // Main content of the list item
         listItem.innerHTML = `
-            <div class="forecast-summary">
+            <div class="forecast_summary">
                 <span class="f_day">${day.week.slice(0, 3)}, ${forecastDay} ${monthAbbreviation}</span>
                 <span class="f_temp_range">
-                    <img src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
+                    <img class="f_icon" src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
                     <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
                     <span class="r_max_temp">${day.forecastMaxtemp.value}</span>°C
                 </span>
-                <img id="expand_button" src="image/close.png" alt="Click me to expand">
+                <img class="f_icon" id="expand_button" src="image/close.png" alt="Click me to expand">
             </div>
-            <div class="forecast-details" style="display: none;">
+            <div class="forecast_details" style="display: none;">
                 <p><strong>Wind:</strong> ${day.forecastWind}</p>
                 <p><strong>Weather:</strong> ${day.forecastWeather}</p>
                 <p><strong>Max Humidity:</strong> ${day.forecastMaxrh.value}%</p>
@@ -232,20 +273,20 @@ function generateForecastList(weatherForecast) {
         // Add click event to the expand
         const expandButton = listItem.querySelector("#expand_button");
         listItem.addEventListener("click", () => {
-            const details = listItem.querySelector(".forecast-details");
+            const details = listItem.querySelector(".forecast_details");
 
             // Toggle the visibility of the details
             if (details.style.display === "none") {
                 // Collapse all other details
-                document.querySelectorAll(".forecast-details").forEach(detail => {
+                document.querySelectorAll(".forecast_details").forEach(detail => {
                     detail.style.display = "none";
                 });
                 
                 details.style.display = "block"; // Expand the clicked item
-                expandButton.src = "image/open.png";
+                expandButton.src = style == "style_light.css" ? "image/dark_mode/open.png" : "image/open.png";
             } else {
                 details.style.display = "none"; // Collapse the clicked item
-                expandButton.src = "image/close.png";
+                expandButton.src = style == "style_light.css" ? "image/dark_mode/close.png" : "image/close.png";
             }
         });
 
@@ -323,19 +364,19 @@ async function getWeatherWarning() {
     return getWeather('warningSummary').then(data => {
 
         // Sample data for testing
-        // data = {
-        //     "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
-        //     "WCOLD": {"name": "Cold Weather Warning", "code": "WCOLD", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WFNTSA": {"name": "Flooding Announcement in Northern New Territories", "code": "WFNTSA", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:40:00+08:00"},
-        //     "WMSGNL": {"name": "Strong Monsoon Signal", "code": "WMSGNL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WL": {"name": "Landslip Warning", "code": "WL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WRAIN": {"name": "Rainstorm Warning Signal", "code": "WRAINR", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WTMW": {"name": "Tsunami Warning", "code": "WTMW", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WTS": {"name": "Thunderstorm Warning", "code": "WTS", "actionCode": "EXTEND", "issueTime": "2020-09-24T11:40:00+08:00", "expireTime": "2020-09-24T19:30:00+08:00"},
-        //     "WTCSGNL": {"name": "Tropical Cyclone Warning Signal", "code": "TC3", "actionCode": "ISSUE", "type": "Strong Wind Signal No. 3", "issueTime": "2020-09-24T11:15:00+08:00"},
-        //     "WFIRE": {"name": "Fire Danger Warning", "code": "WFIRER", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"}
-        // }
+        data = {
+            "WFROST": {"name": "Frost Warning", "code": "WFROST", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WHOT": {"name": "Very Hot Weather Warning", "code": "WHOT", "actionCode": "ISSUE", "issueTime": "2020-09-24T07:00:00+08:00"},
+            "WCOLD": {"name": "Cold Weather Warning", "code": "WCOLD", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WFNTSA": {"name": "Flooding Announcement in Northern New Territories", "code": "WFNTSA", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:40:00+08:00"},
+            "WMSGNL": {"name": "Strong Monsoon Signal", "code": "WMSGNL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WL": {"name": "Landslip Warning", "code": "WL", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WRAIN": {"name": "Rainstorm Warning Signal", "code": "WRAINR", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WTMW": {"name": "Tsunami Warning", "code": "WTMW", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WTS": {"name": "Thunderstorm Warning", "code": "WTS", "actionCode": "EXTEND", "issueTime": "2020-09-24T11:40:00+08:00", "expireTime": "2020-09-24T19:30:00+08:00"},
+            "WTCSGNL": {"name": "Tropical Cyclone Warning Signal", "code": "TC3", "actionCode": "ISSUE", "type": "Strong Wind Signal No. 3", "issueTime": "2020-09-24T11:15:00+08:00"},
+            "WFIRE": {"name": "Fire Danger Warning", "code": "WFIRER", "type": "Red", "actionCode": "ISSUE", "issueTime": "2020-09-24T11:15:00+08:00"}
+        }
           
         if (Object.keys(data).length === 0){ 
             return null;
@@ -353,14 +394,14 @@ async function getWeatherWarning() {
 
 // Get the weather image path
 function getWeatherImage(weather){
-    const weatherImages = {
-        "Sunny": "./image/weather/sunny.png",
-        "Cloudy": "./image/weather/cloudy.png",
-        "Shower rain": "./image/weather/rainny.png",
-        "Rainstorm": "./image/weather/rainstorm.png",
-        "Partly cloudy": "./image/weather/sunny_cloudy.png",
-        "Drizzle": "./image/weather/sunny_rainny.png",
-    };
+    // const weatherImages = {
+    //     "Sunny": "./image/weather/sunny.png",
+    //     "Cloudy": "./image/weather/cloudy.png",
+    //     "Shower rain": "./image/weather/rainny.png",
+    //     "Rainstorm": "./image/weather/rainstorm.png",
+    //     "Partly cloudy": "./image/weather/sunny_cloudy.png",
+    //     "Drizzle": "./image/weather/sunny_rainny.png",
+    // };
     return weatherImages[weather] || "unknown";
 }
 
@@ -398,62 +439,62 @@ async function getWarningDetail(warncode, warnName) {
 
     return getWeather('warningInfo').then(data => {
         // Sample data for testing
-        // data = {
-        //     "details": [
-        //       {
-        //         "contents": [
-        //           "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
-        //           "Thunderstorms are expected to occur over Hong Kong.",
-        //           "Members of the public are advised to take the following precautions when thunderstorms occur:",
-        //           "1. Stay indoors. Seek shelter in buildings if you are engaging in outdoor activities.",
-        //           "2. Do not stand on high grounds. Keep away from highly conductive objects, trees or masts."
-        //         ],
-        //         "warningStatementCode": "WTS",
-        //         "updateTime": "2020-09-24T05:00:00+08:00"
-        //       },
-        //       {
-        //         "contents": ["The Strong Monsoon Signal was issued at 11:15 a.m."],
-        //         "warningStatementCode": "WMSGNL",
-        //         "updateTime": "2020-09-24T11:15:00+08:00"
-        //       },
-        //       {
-        //         "contents": ["Landslip Warning issued at 11:15 a.m."],
-        //         "warningStatementCode": "WL",
-        //         "updateTime": "2020-09-24T11:15:00+08:00"
-        //       },
-        //       {
-        //         "contents": [
-        //           "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
-        //           "The Hong Kong Observatory is forecasting very hot weather with light winds in Hong Kong today. The risk of heatstroke is high.",
-        //           "When engaged in outdoor work or activities, drink plenty of water and avoid overexertion.",
-        //           "If not feeling well, take a rest in the shade or cooler place as soon as possible.",
-        //           "People staying indoors without air-conditioning should keep windows open as far as possible to ensure adequate ventilation.",
-        //           "Avoid prolonged exposure under sunlight. Loose clothing, suitable hats, and UV-blocking sunglasses can reduce the chance of sunburn by solar ultraviolet radiation.",
-        //           "Swimmers and those taking part in outdoor activities should use a sunscreen lotion of SPF 15 or above and reapply it frequently.",
-        //           "Beware of health and wellbeing of elderly or persons with chronic medical conditions. If you know of them, call or visit them occasionally to check if they need any assistance."
-        //         ],
-        //         "warningStatementCode": "WHOT",
-        //         "updateTime": "2020-09-24T07:00:00+08:00"
-        //       },
-        //       {
-        //         "contents": [
-        //           "The Cold Weather Warning has been issued by the Hong Kong Observatory at 11:15 a.m.",
-        //           "Cold weather is expected in Hong Kong in the morning and at night today and tomorrow.",
-        //           "The minimum temperatures in the urban areas overnight will be around 11 degrees or below. It will be a couple of degrees lower in the northern part of the New Territories and on high ground.",
-        //           "People are advised to put on warm clothes and ensure adequate indoor ventilation.",
-        //           "As it is very windy in parts of the territory, wind chill effect will be significant.",
-        //           "Prolonged exposure to wintry winds may lead to hypothermia.",
-        //           "If you know of elderly persons or persons with chronic medical conditions staying alone, please call or visit them occasionally to check if they need any assistance.",
-        //           "Owing to icing conditions in Tai Mo Shan, members of the public, motorists, and cyclists should be aware of the danger on slippery roads.",
-        //           "Make sure heaters are safe before use, and place them away from any combustibles.",
-        //           "Do not light fires indoors as a means to keep warm.",
-        //           "Ensure there is plenty of fresh air in your room when using an old-type gas water heater."
-        //         ],
-        //         "warningStatementCode": "WCOLD",
-        //         "updateTime": "2020-09-24T11:15:00+08:00"
-        //       }
-        //     ]
-        // }
+        data = {
+            "details": [
+              {
+                "contents": [
+                  "Thunderstorm Warning issued at 11:40 a.m. on 24 Sep 2020 has been extended until 7:30 p.m. today.",
+                  "Thunderstorms are expected to occur over Hong Kong.",
+                  "Members of the public are advised to take the following precautions when thunderstorms occur:",
+                  "1. Stay indoors. Seek shelter in buildings if you are engaging in outdoor activities.",
+                  "2. Do not stand on high grounds. Keep away from highly conductive objects, trees or masts."
+                ],
+                "warningStatementCode": "WTS",
+                "updateTime": "2020-09-24T05:00:00+08:00"
+              },
+              {
+                "contents": ["The Strong Monsoon Signal was issued at 11:15 a.m."],
+                "warningStatementCode": "WMSGNL",
+                "updateTime": "2020-09-24T11:15:00+08:00"
+              },
+              {
+                "contents": ["Landslip Warning issued at 11:15 a.m."],
+                "warningStatementCode": "WL",
+                "updateTime": "2020-09-24T11:15:00+08:00"
+              },
+              {
+                "contents": [
+                  "The Very Hot Weather Warning has been issued by the Hong Kong Observatory at 07:00.",
+                  "The Hong Kong Observatory is forecasting very hot weather with light winds in Hong Kong today. The risk of heatstroke is high.",
+                  "When engaged in outdoor work or activities, drink plenty of water and avoid overexertion.",
+                  "If not feeling well, take a rest in the shade or cooler place as soon as possible.",
+                  "People staying indoors without air-conditioning should keep windows open as far as possible to ensure adequate ventilation.",
+                  "Avoid prolonged exposure under sunlight. Loose clothing, suitable hats, and UV-blocking sunglasses can reduce the chance of sunburn by solar ultraviolet radiation.",
+                  "Swimmers and those taking part in outdoor activities should use a sunscreen lotion of SPF 15 or above and reapply it frequently.",
+                  "Beware of health and wellbeing of elderly or persons with chronic medical conditions. If you know of them, call or visit them occasionally to check if they need any assistance."
+                ],
+                "warningStatementCode": "WHOT",
+                "updateTime": "2020-09-24T07:00:00+08:00"
+              },
+              {
+                "contents": [
+                  "The Cold Weather Warning has been issued by the Hong Kong Observatory at 11:15 a.m.",
+                  "Cold weather is expected in Hong Kong in the morning and at night today and tomorrow.",
+                  "The minimum temperatures in the urban areas overnight will be around 11 degrees or below. It will be a couple of degrees lower in the northern part of the New Territories and on high ground.",
+                  "People are advised to put on warm clothes and ensure adequate indoor ventilation.",
+                  "As it is very windy in parts of the territory, wind chill effect will be significant.",
+                  "Prolonged exposure to wintry winds may lead to hypothermia.",
+                  "If you know of elderly persons or persons with chronic medical conditions staying alone, please call or visit them occasionally to check if they need any assistance.",
+                  "Owing to icing conditions in Tai Mo Shan, members of the public, motorists, and cyclists should be aware of the danger on slippery roads.",
+                  "Make sure heaters are safe before use, and place them away from any combustibles.",
+                  "Do not light fires indoors as a means to keep warm.",
+                  "Ensure there is plenty of fresh air in your room when using an old-type gas water heater."
+                ],
+                "warningStatementCode": "WCOLD",
+                "updateTime": "2020-09-24T11:15:00+08:00"
+              }
+            ]
+        }
 
         const name = document.getElementById('warn_name');
         const statement = document.getElementById('warn_statement');

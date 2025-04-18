@@ -5,15 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>COMP3421-25-P3 Weather API Group Project</title>
 
-    <link rel="stylesheet" href="style.css">
+    <link id="pagestyle" rel="stylesheet" href="style_light.css">
+    <!-- <link rel="stylesheet" href="style_light.css"> -->
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
 
 </head>
 <body>
-    
+
     <nav class="navbar">
         <ul>
             <div class="logo">
@@ -27,6 +30,14 @@
                 <li><a href="#region">Region</a></li>
                 <li><a href="#forecast">Forecast</a></li>
             </div>
+
+            <div class="nav_buttons">
+                <li><button id = "lang_en">EN</button></li>
+                <li><button id = "lang_chi">中</button></li>
+                <i id="switch_button" class="fa fa-sun-o" onclick="toggleTheme()"></i>
+                <!-- <li><button id = "style_button"></button></li> -->
+            </div>
+            
             <li id="fetch_date">Date</li>
         </ul>
     </nav>
