@@ -67,7 +67,7 @@ body {
     font-weight: 600;
 }
 
-.nav_buttons{
+.nav_buttons {
     display: flex;
     justify-content: space-evenly;
     align-items: center;
@@ -75,17 +75,19 @@ body {
 }
 
 
-.nav_buttons:hover{
+.nav_buttons:hover {
     cursor: pointer;
 }
 
-#lang_en, #lang_chi{
+#lang_en,
+#lang_chi {
     background-color: #ffffff;
     border-radius: 3px;
     border: none;
 }
 
-#lang_en:hover, #lang_chi:hover{
+#lang_en:hover,
+#lang_chi:hover {
     cursor: pointer;
     background-color: #b3d2f1;
     transition: background-color 0.3s ease;

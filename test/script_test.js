@@ -1,5 +1,5 @@
 let lang = document.documentElement.lang;
-lang = "en"; 
+lang = "tc"; 
 
 function getWeather(type) {
     fetch(`http://localhost:3000/weather/${type}?lang=${lang}`)
