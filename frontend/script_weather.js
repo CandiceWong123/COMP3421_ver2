@@ -250,10 +250,16 @@ function generateForecastList(weatherForecast) {
         const dateObj = new Date(`${day.forecastDate.slice(0, 4)}-${day.forecastDate.slice(4, 6)}-${forecastDay}`);
         const monthAbbreviation = dateObj.toLocaleString('en-US', { month: 'short' });
 
+        const formattedDate =
+        document.documentElement.lang == "tc"
+            ? `${day.week.slice(0, 3)}, ${dateObj.getMonth() + 1}月${dateObj.getDate()}日`
+            : `${day.week.slice(0, 3)}, ${forecastDay} ${dateObj.toLocaleString("en-US", { month: "short" })}`;
+
+
         // Main content of the list item
         listItem.innerHTML = `
             <div class="forecast_summary">
-                <span class="f_day">${day.week.slice(0, 3)}, ${forecastDay} ${monthAbbreviation}</span>
+                <span class="f_day">${formattedDate}</span>
                 <span class="f_temp_range">
                     <img class="f_icon" src=${getWeatherImage(determineWeather(day.forecastWeather))} alt="Weather Icon">
                     <span class="r_min_temp">${day.forecastMintemp.value}</span> | 
@@ -301,19 +307,37 @@ function determineWeather(forecast){
     const forecastArray = forecast.toLowerCase().split(/\s+/); 
     let isSunny = false, isCloudy = false, isRainny = false, isRainstorm = false;
 
-    for (const word of forecastArray) {
-        if (word.includes("sun") || word.includes("hot")){
-            isSunny = true;
-        } 
-        else if (word.includes("cloud") || word.includes("mist")) {
-            isCloudy = true;
+
+    if (document.documentElement.lang == "en") {
+        for (const word of forecastArray) {
+            if (word.includes("sun") || word.includes("hot")){
+                isSunny = true;
+            } 
+            else if (word.includes("cloud") || word.includes("mist")) {
+                isCloudy = true;
+            }
+            else if (word.includes("rainstorm") || word.includes("thunder")) {
+                isRainstorm = true;
+            }
+            else if (word.includes("rain") || word.includes("shower") || word.includes("drizzle")) {
+                isRainny = true;
+            } 
         }
-        else if (word.includes("rainstorm") || word.includes("thunder")) {
-            isRainstorm = true;
+    }else if (document.documentElement.lang == "tc") {
+        for (const word of forecastArray) {
+            if (word.includes("陽") || word.includes("熱")){
+                isSunny = true;
+            } 
+            if (word.includes("雲") || word.includes("霧")) {
+                isCloudy = true;
+            }
+            if (word.includes("雷") || word.includes("暴雨")) {
+                isRainstorm = true;
+            }
+            if (word.includes("雨")) {
+                isRainny = true;
+            } 
         }
-        else if (word.includes("rain") || word.includes("shower") || word.includes("drizzle")) {
-            isRainny = true;
-        } 
     }
 
     // Determine the weather based on boolean checks and return
@@ -335,8 +359,7 @@ function determineWeather(forecast){
         return "Cloudy";
     }
 
-    return "Sunny"; // delete
-    // return "unknown"; // If no keywords match
+    return "unknown"; // If no keywords match
 }
 
 // Get regional weather condition
@@ -689,6 +712,21 @@ async function loadTranslations(lang) {
         console.error("Error fetching weather warning data:", error);
     });
 
+
+
+
+    const regionName = document.getElementById('r_region').innerText;
+    document.getElementById('search_input').innerText = regionName;
+    let region = regions.find(region => region.station === regionName || region.station_tc === regionName);
+
+    if (lang == "tc"){
+        document.getElementById('r_region').innerText = region.station_tc;
+    }else{
+        document.getElementById('r_region').innerText = region.station;
+    }
+    searchRegion();
+
+
     getWeather('forecast').then(data => {
         let report = data.generalSituation;
         document.getElementById('forecast_report').innerText = report;
@@ -712,29 +750,6 @@ async function loadTranslations(lang) {
     }).catch(error => {
         console.error("Error fetching forecast data:", error);
     });
-
-
-
-
-    // document.querySelectorAll("strong").forEach(item => {
-    //     console.log
-    //     const key = item.getAttribute("data-i18n");
-    //     if (translations[lang][key]) {
-    //         item.innerText = translations[lang][key];
-    //     }
-    // });
-
-    // getWeather('forecast').then(data => {
-    //     let report = data.generalSituation;
-    //     document.getElementById('forecast_report').innerText = report;
-    //     let forecasts = data.weatherForecast;
-    //     generateForecastList(forecasts);
-
-    // }).catch(error => {
-    //     console.error("Error fetching forecast data:", error);
-    // });
-
-
 }
 
 

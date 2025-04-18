@@ -348,7 +348,7 @@ p {
 }
 
 #forecast_report {
-    width: 50%;
+    width: 45%;
     float: left;
     margin-right: 30px;
     /* position: sticky; */
@@ -370,11 +370,11 @@ p {
 }
 
 .f_day {
-    width: 100px;
+    width: 130px;
 }
 
 #forecast_list span {
-    font-size: 14px;
+    font-size: 12px;
 }
 
 .forecast_preview ul li img {
