@@ -724,7 +724,7 @@ async function loadTranslations(lang) {
     }else{
         document.getElementById('r_region').innerText = region.station;
     }
-    searchRegion();
+    // searchRegion();
 
 
     getWeather('forecast').then(data => {
