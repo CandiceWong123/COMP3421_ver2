@@ -706,7 +706,7 @@ async function loadTranslations(lang) {
 
 // Fetch data from HK Observatory API
 async function getWeather(type) {
-    return fetch(`http://localhost:3000/weather/${type}?lang=${document.documentElement.lang}`)
+    return fetch(`${window.location.origin}/weather/${type}?lang=${document.documentElement.lang}`)
     // return fetch(`https://myweather-f1eb2.web.app/weather/${type}?lang=${document.documentElement.lang}`)
         .then(response => {
             if (!response.ok) {
@@ -722,7 +722,7 @@ async function getWeather(type) {
 
 async function getStationData(station) {
     
-    return fetch(`http://localhost:3000/weather/station-data?station=${station}`)
+    return fetch(`${window.location.origin}/weather/station-data?station=${station}`)
     // return fetch(`https://myweather-f1eb2.web.app/weather/station-data?station=${station}`)
         .then(response => {
             if (!response.ok) {
@@ -743,7 +743,7 @@ async function getStationData(station) {
 }
 
 async function getUVIndexData() {
-    return fetch(`http://localhost:3000/weather/uv-index`)
+    return fetch(`${window.location.origin}/weather/uv-index`)
     // return fetch(`https://myweather-f1eb2.web.app/weather/uv-index`)
         .then(response => {
             if (!response.ok) {

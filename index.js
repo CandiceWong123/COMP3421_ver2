@@ -3,9 +3,16 @@ const cors = require('cors');
 const axios = require('axios');
 const csv = require('csv-parser'); 
 const { Readable } = require('stream');
-
+const path = require('path'); // Add this line
 const app = express();
-const PORT = 3000;
+
+app.use(express.static(path.join(__dirname, 'public')));
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
+
+const PORT = process.env.PORT || 3000
 
 app.use(cors());
 
